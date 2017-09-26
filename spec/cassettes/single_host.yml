@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://icinga2.example.net:5665/v1//objects/hosts?host=foo.example.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.2p198
+      Host:
+      - icinga2.example.net:5665
+      Authorization:
+      - Basic cm9vdDpmb28=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Icinga/r2.7.1-1
+    body:
+      encoding: UTF-8
+      string: '{"results":[{"attrs":{"__name":"foo.example.net","acknowledgement":0.0,"acknowledgement_expiry":0.0,"action_url":"","active":true,"address":"foo.example.net","address6":"","check_attempt":1.0,"check_command":"hostalive4","check_interval":300.0,"check_period":"","check_timeout":null,"command_endpoint":"","display_name":"foo.example.net","downtime_depth":0.0,"enable_active_checks":true,"enable_event_handler":true,"enable_flapping":false,"enable_notifications":true,"enable_passive_checks":true,"enable_perfdata":true,"event_command":"","flapping":false,"flapping_last_change":1506458723.9767460823,"flapping_negative":298.0,"flapping_positive":0.0,"flapping_threshold":30.0,"force_next_check":false,"force_next_notification":false,"groups":["linux-servers","mysql-servers","nginx-servers","openvzve-servers","redis-servers"],"ha_mode":0.0,"icon_image":"","icon_image_alt":"","last_check":1506458723.9767251015,"last_check_result":{"active":true,"check_source":"backup.jbox-web.fr","command":["/usr/lib/nagios/plugins/check_ping","-4","-H","foo.example.net","-c","5000,100%","-w","3000,80%"],"execution_end":1506458723.9766581059,"execution_start":1506458723.9727890491,"exit_status":3.0,"output":"check_ping:
+        Invalid hostname/address - foo.example.net\nUsage:\ncheck_ping -H <host_address>
+        -w <wrta>,<wpl>% -c <crta>,<cpl>%\n [-p packets] [-t timeout] [-4","performance_data":[],"schedule_end":1506458723.9767251015,"schedule_start":1506458723.9655320644,"state":3.0,"type":"CheckResult","vars_after":{"attempt":1.0,"reachable":true,"state":3.0,"state_type":1.0},"vars_before":{"attempt":1.0,"reachable":true,"state":3.0,"state_type":1.0}},"last_hard_state":1.0,"last_hard_state_change":1506458126.6599218845,"last_reachable":true,"last_state":1.0,"last_state_change":1506457527.0597529411,"last_state_down":0.0,"last_state_type":1.0,"last_state_unreachable":0.0,"last_state_up":0.0,"max_check_attempts":3.0,"name":"foo.example.net","next_check":1506459022.6267471313,"notes":"","notes_url":"","original_attributes":null,"package":"_etc","paused":false,"retry_interval":60.0,"severity":136.0,"source_location":{"first_column":1.0,"first_line":2.0,"last_column":29.0,"last_line":2.0,"path":"/etc/icinga2/conf.d/servers/foo.example.net.conf"},"state":1.0,"state_type":1.0,"templates":["foo.example.net","generic-host"],"type":"Host","vars":{"by_ssh_port":22.0,"local_disks":["/"],"notification":{"mail":{"groups":["icingaadmins"]}},"os":"Linux","roles":["memcached","mysql","nginx","php7","postgres","redis"],"server_type":"openvzve"},"version":0.0,"volatile":false,"zone":""},"joins":{},"meta":{},"name":"foo.example.net","type":"Host"}]}'
+    http_version: 
+  recorded_at: Tue, 26 Sep 2017 20:50:21 GMT
+recorded_with: VCR 3.0.3

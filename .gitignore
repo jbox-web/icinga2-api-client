@@ -1,0 +1,18 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore Gemfile.lock
+/Gemfile.lock
+gemfiles/*.lock
+
+# Ignore test files
+/coverage
+
+# Ignore dummy app files
+/spec/dummy/db/*.sqlite3
+/spec/dummy/db/*.sqlite3-journal
+/spec/dummy/log/*.log
+/spec/dummy/tmp/
+
+# RVM files
+/.ruby-version

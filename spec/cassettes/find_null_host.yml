@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://icinga2.example.net:5665/v1//objects/hosts?host=baz.example.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.2p198
+      Host:
+      - icinga2.example.net:5665
+      Authorization:
+      - Basic cm9vdDpmb28=
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Icinga/r2.7.1-1
+    body:
+      encoding: UTF-8
+      string: '{"error":404.0,"status":"No objects found."}'
+    http_version: 
+  recorded_at: Tue, 26 Sep 2017 20:43:14 GMT
+recorded_with: VCR 3.0.3
