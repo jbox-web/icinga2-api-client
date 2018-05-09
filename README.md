@@ -4,7 +4,6 @@
 [![Build Status](https://travis-ci.org/jbox-web/icinga2-api-client.svg?branch=master)](https://travis-ci.org/jbox-web/icinga2-api-client)
 [![Code Climate](https://codeclimate.com/github/jbox-web/icinga2-api-client/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/icinga2-api-client)
 [![Test Coverage](https://codeclimate.com/github/jbox-web/icinga2-api-client/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/icinga2-api-client/coverage)
-[![Dependency Status](https://gemnasium.com/badges/github.com/jbox-web/icinga2-api-client.svg)](https://gemnasium.com/github.com/jbox-web/icinga2-api-client)
 
 A Ruby gem to interact easily with the Icinga2 API.
 
