@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('lib', __dir__)
-$LOAD_PATH.push(lib) unless $LOAD_PATH.include?(lib)
-require 'icinga2/api/version'
+require_relative 'lib/icinga2/api/version'
 
 Gem::Specification.new do |s|
   s.name        = 'icinga2-api-client'
@@ -15,6 +13,8 @@ Gem::Specification.new do |s|
   s.description = %q{Interface to interact with the Icinga2 API}
   s.license     = 'MIT'
 
+  s.files = `git ls-files`.split("\n")
+
   s.add_runtime_dependency 'rest-client'
   s.add_runtime_dependency 'activesupport'
 
@@ -24,9 +24,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'vcr'
   s.add_development_dependency 'webmock'
   s.add_development_dependency 'pry'
-
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
-  s.require_paths = ['lib']
 end
