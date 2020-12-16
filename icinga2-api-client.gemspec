@@ -4,7 +4,7 @@ require_relative 'lib/icinga2/api/version'
 
 Gem::Specification.new do |s|
   s.name        = 'icinga2-api-client'
-  s.version     = Icinga2::API::VERSION
+  s.version     = Icinga2::API::VERSION::STRING
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Nicolas Rodriguez']
   s.email       = ['nrodriguez@jbox-web.com']
