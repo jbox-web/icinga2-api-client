@@ -1,7 +1,7 @@
 # Icinga2 API Client
 
 [![GitHub license](https://img.shields.io/github/license/jbox-web/icinga2-api-client.svg)](https://github.com/jbox-web/icinga2-api-client/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/jbox-web/icinga2-api-client.svg?branch=master)](https://travis-ci.org/jbox-web/icinga2-api-client)
+[![CI](https://github.com/jbox-web/icinga2-api-client/workflows/CI/badge.svg)](https://github.com/jbox-web/icinga2-api-client/actions)
 [![Code Climate](https://codeclimate.com/github/jbox-web/icinga2-api-client/badges/gpa.svg)](https://codeclimate.com/github/jbox-web/icinga2-api-client)
 [![Test Coverage](https://codeclimate.com/github/jbox-web/icinga2-api-client/badges/coverage.svg)](https://codeclimate.com/github/jbox-web/icinga2-api-client/coverage)
 
