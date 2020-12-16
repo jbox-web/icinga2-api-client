@@ -1,6 +1,7 @@
 require 'json'
 require 'rest-client'
 require 'active_support/core_ext/hash'
+require 'active_support/core_ext/numeric/time'
 
 require 'icinga2/api/version'
 
