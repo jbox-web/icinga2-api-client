@@ -10,15 +10,15 @@ Gem::Specification.new do |s|
   s.email       = ['nrodriguez@jbox-web.com']
   s.homepage    = 'https://github.com/jbox-web/active_use_case'
   s.summary     = 'Interface to interact with the Icinga2 API'
-  s.description = 'Interface to interact with the Icinga2 API'
   s.license     = 'MIT'
 
   s.required_ruby_version = '>= 2.5.0'
 
   s.files = `git ls-files`.split("\n")
 
-  s.add_runtime_dependency 'activesupport'
+  s.add_runtime_dependency 'activesupport', '>= 5.1'
   s.add_runtime_dependency 'rest-client'
+  s.add_runtime_dependency 'zeitwerk'
 
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'pry'

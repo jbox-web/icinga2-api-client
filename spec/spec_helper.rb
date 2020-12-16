@@ -13,8 +13,6 @@ VCR.configure do |c|
   c.hook_into            :webmock
 end
 
-require 'icinga2/api'
-
 def create_downtime(host, service)
   duration   = 5.minute
   start_time = DateTime.now
@@ -32,3 +30,5 @@ def create_downtime(host, service)
           duration:   duration.to_i
         )
 end
+
+require 'icinga2/api'
