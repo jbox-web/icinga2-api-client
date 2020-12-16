@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Icinga2
   module API
     class Client

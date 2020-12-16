@@ -9,9 +9,11 @@ Gem::Specification.new do |s|
   s.authors     = ['Nicolas Rodriguez']
   s.email       = ['nrodriguez@jbox-web.com']
   s.homepage    = 'https://github.com/jbox-web/active_use_case'
-  s.summary     = %q{Interface to interact with the Icinga2 API}
-  s.description = %q{Interface to interact with the Icinga2 API}
+  s.summary     = 'Interface to interact with the Icinga2 API'
+  s.description = 'Interface to interact with the Icinga2 API'
   s.license     = 'MIT'
+
+  s.required_ruby_version = '>= 2.5.0'
 
   s.files = `git ls-files`.split("\n")
 
@@ -22,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rubocop'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'vcr'
   s.add_development_dependency 'webmock'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Icinga2
   module API
     class Downtime < Icinga2::API::Resource
@@ -18,7 +20,7 @@ module Icinga2
         __name
       end
 
-      alias :to_s :full_name
+      alias to_s full_name
 
       def cancel
         result = api_client.api.post('/actions/remove-downtime', query: { downtime: full_name })

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Icinga2
   module API
     class Hosts
@@ -16,7 +18,7 @@ module Icinga2
       def find(hostname)
         begin
           hosts = api_client.api.get('/objects/hosts', query: { host: hostname })
-        rescue RestClient::NotFound => _
+        rescue RestClient::NotFound => _e
           nil
         else
           host = hosts.first

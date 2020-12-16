@@ -1,0 +1,18 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.5
+  Exclude:
+    - bin/*
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 115

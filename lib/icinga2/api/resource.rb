@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Icinga2
   module API
     class Resource
@@ -12,14 +14,14 @@ module Icinga2
 
       def attributes=(args = {})
         args.each do |key, value|
-          self.send(:"#{key}=", value)
+          send(:"#{key}=", value)
         end
       end
 
       def method_missing(meth, *args, &block)
         if meth.to_s =~ /^(.+)=$/
-          @attributes[$1.to_sym] = args[0]
-        elsif @attributes.has_key?(meth)
+          @attributes[Regexp.last_match(1).to_sym] = args[0]
+        elsif @attributes.key?(meth)
           @attributes[meth]
         else
           # You *must* call super if you don't handle the
@@ -35,7 +37,7 @@ module Icinga2
         filter_hash(except, only)
       end
 
-      alias :to_h :to_hash
+      alias to_h to_hash
 
       # When using YAML.dump to look at objects attributes,
       # this method is called to get the list of object's attributes

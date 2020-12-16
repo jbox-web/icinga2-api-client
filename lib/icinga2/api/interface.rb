@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Icinga2
   module API
     class Interface
@@ -35,9 +37,9 @@ module Icinga2
 
       def build_url(path, query = {})
         url = "#{base_url}/#{version}/#{path}"
-        if !query.empty?
+        unless query.empty?
           params = query.to_query
-          url << "?#{params}"
+          url += "?#{params}"
         end
         url
       end
@@ -48,7 +50,7 @@ module Icinga2
 
       def send_request(opts = {})
         data = RestClient::Request.execute(opts)
-        data = JSON.load(data.body)
+        data = JSON.parse(data.body)
         data['results']
       end
 
