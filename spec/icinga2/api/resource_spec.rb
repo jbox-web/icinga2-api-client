@@ -54,4 +54,18 @@ RSpec.describe Icinga2::API::Resource do
       end
     end
   end
+
+  describe '#respond_to_missing?' do
+    context 'when method exist' do
+      it 'should return true' do
+        expect(subject.respond_to?(:foo)).to be true
+      end
+    end
+
+    context 'when method dont exist' do
+      it 'should return false' do
+        expect(subject.respond_to?(:baz)).to be false
+      end
+    end
+  end
 end

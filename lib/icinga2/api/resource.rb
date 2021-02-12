@@ -31,6 +31,10 @@ module Icinga2
         end
       end
 
+      def respond_to_missing?(method_name, include_private = false)
+        @attributes.key?(method_name) || super
+      end
+
       def to_hash(opts = {})
         except = opts.fetch(:except, [])
         only   = opts.fetch(:only, [])
