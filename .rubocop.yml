@@ -1,11 +1,15 @@
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
   TargetRubyVersion: 2.5
   Exclude:
     - bin/*
     - spec/**/*
 
 Style/Documentation:
+  Enabled: false
+
+Style/RedundantBegin:
   Enabled: false
 
 Layout/EmptyLinesAroundModuleBody:
