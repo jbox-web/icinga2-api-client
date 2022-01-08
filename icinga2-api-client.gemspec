@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split("\n")
 
-  s.add_runtime_dependency 'activesupport', '>= 5.1'
+  s.add_runtime_dependency 'activesupport', '>= 5.2'
   s.add_runtime_dependency 'rest-client'
   s.add_runtime_dependency 'zeitwerk'
 
