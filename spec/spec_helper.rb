@@ -28,7 +28,7 @@ RSpec.configure do |config|
 end
 
 def create_downtime(host, service)
-  duration   = 5.minute
+  duration   = 300
   start_time = DateTime.now
   end_time   = start_time + duration
 
@@ -39,9 +39,9 @@ def create_downtime(host, service)
         .schedule_downtime(
           author:     'admin',
           comment:    'It will be down for a while, thank you!',
-          start_time: start_time.to_i,
-          end_time:   end_time.to_i,
-          duration:   duration.to_i
+          start_time: start_time.strftime('%s'),
+          end_time:   end_time.strftime('%s'),
+          duration:   duration
         )
 end
 
