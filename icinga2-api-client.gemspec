@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Interface to interact with the Icinga2 API'
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 2.6.0'
+  s.required_ruby_version = '>= 2.7.0'
 
   s.files = `git ls-files`.split("\n")
 
