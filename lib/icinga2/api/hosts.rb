@@ -18,7 +18,7 @@ module Icinga2
       def find(hostname)
         begin
           hosts = api_client.api.get('/objects/hosts', query: { host: hostname })
-        rescue RestClient::NotFound => _e
+        rescue Faraday::ResourceNotFound => _e
           nil
         else
           host = hosts.first

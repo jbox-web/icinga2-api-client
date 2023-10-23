@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files`.split("\n")
 
   s.add_runtime_dependency 'activesupport', '>= 6.0'
-  s.add_runtime_dependency 'rest-client'
+  s.add_runtime_dependency 'faraday'
   s.add_runtime_dependency 'zeitwerk'
 
   s.add_development_dependency 'guard-rspec'
