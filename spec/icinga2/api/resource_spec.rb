@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Icinga2::API::Resource do
 
-  let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', version: 'v1', username: 'root', password: 'foo', verify_ssl: false) }
+  let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
   subject { described_class.new(api_client: client.api, foo: 'bar', bar: 'foo') }
 

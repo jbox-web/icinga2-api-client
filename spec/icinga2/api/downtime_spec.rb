@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Icinga2::API::Downtime do
 
-  let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', version: 'v1', username: 'root', password: 'foo', verify_ssl: false) }
+  let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
   subject do
     create_downtime('foo.example.net', 'ssh')

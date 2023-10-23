@@ -27,6 +27,10 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 end
 
+def icinga_credentials
+  { version: 'v1', username: 'root', password: ENV.fetch('ICINGA_API_PASSWORD', 'root'), verify_ssl: false }
+end
+
 def create_downtime(host, service)
   duration   = 300
   start_time = DateTime.now
