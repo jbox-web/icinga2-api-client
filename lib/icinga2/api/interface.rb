@@ -36,7 +36,7 @@ module Icinga2
       private
 
       def build_url(path, query = {})
-        url = "#{base_url}/#{version}/#{path}"
+        url = "#{base_url}/#{version}#{path}"
         unless query.empty?
           params = query.to_query
           url += "?#{params}"

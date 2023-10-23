@@ -2,35 +2,329 @@
 http_interactions:
 - request:
     method: get
-    uri: https://icinga2.example.net:5665/v1//objects/hosts
+    uri: https://icinga2.example.net:5665/v1/objects/hosts
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Accept:
       - "*/*"
-      Accept-Encoding:
-      - gzip, deflate
       User-Agent:
-      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.4.2p198
+      - rest-client/2.1.0 (darwin22 arm64) ruby/3.2.2p53
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Host:
       - icinga2.example.net:5665
       Authorization:
-      - Basic cm9vdDpmb28=
+      - Basic foobar
   response:
     status:
       code: 200
       message: OK
     headers:
+      Server:
+      - Icinga/r2.14.0-1
       Content-Type:
       - application/json
-      Transfer-Encoding:
-      - chunked
-      Server:
-      - Icinga/r2.7.1-1
+      Content-Length:
+      - '26657'
     body:
       encoding: UTF-8
-      string: '{"results":[{"attrs":{"__name":"foo.example.net","acknowledgement":0.0,"acknowledgement_expiry":0.0,"action_url":"","active":true,"address":"foo.example.net","address6":"","check_attempt":1.0,"check_command":"hostalive4","check_interval":300.0,"check_period":"","check_timeout":null,"command_endpoint":"","display_name":"foo.example.net","downtime_depth":0.0,"enable_active_checks":true,"enable_event_handler":true,"enable_flapping":false,"enable_notifications":true,"enable_passive_checks":true,"enable_perfdata":true,"event_command":"","flapping":false,"flapping_last_change":0.0,"flapping_negative":0.0,"flapping_positive":0.0,"flapping_threshold":30.0,"force_next_check":false,"force_next_notification":false,"groups":["linux-servers","mysql-servers","nginx-servers","openvzve-servers","redis-servers"],"ha_mode":0.0,"icon_image":"","icon_image_alt":"","last_check":-1.0,"last_check_result":null,"last_hard_state":1.0,"last_hard_state_change":1506457527.0597529411,"last_reachable":true,"last_state":1.0,"last_state_change":1506457527.0597529411,"last_state_down":0.0,"last_state_type":0.0,"last_state_unreachable":0.0,"last_state_up":0.0,"max_check_attempts":3.0,"name":"foo.example.net","next_check":1506458067.9241631031,"notes":"","notes_url":"","original_attributes":null,"package":"_etc","paused":false,"retry_interval":60.0,"severity":24.0,"source_location":{"first_column":1.0,"first_line":2.0,"last_column":29.0,"last_line":2.0,"path":"/etc/icinga2/conf.d/servers/foo.example.net.conf"},"state":1.0,"state_type":0.0,"templates":["foo.example.net","generic-host"],"type":"Host","vars":{"by_ssh_port":22.0,"local_disks":["/"],"notification":{"mail":{"groups":["icingaadmins"]}},"os":"Linux","roles":["memcached","mysql","nginx","php7","postgres","redis"],"server_type":"openvzve"},"version":0.0,"volatile":false,"zone":""},"joins":{},"meta":{},"name":"foo.example.net","type":"Host"},{"attrs":{"__name":"bar.example.net","acknowledgement":0.0,"acknowledgement_expiry":0.0,"action_url":"","active":true,"address":"bar.example.net","address6":"","check_attempt":1.0,"check_command":"hostalive4","check_interval":300.0,"check_period":"","check_timeout":null,"command_endpoint":"","display_name":"bar.example.net","downtime_depth":0.0,"enable_active_checks":true,"enable_event_handler":true,"enable_flapping":false,"enable_notifications":true,"enable_passive_checks":true,"enable_perfdata":true,"event_command":"","flapping":false,"flapping_last_change":0.0,"flapping_negative":0.0,"flapping_positive":0.0,"flapping_threshold":30.0,"force_next_check":false,"force_next_notification":false,"groups":["linux-servers","mysql-servers","nginx-servers","openvzve-servers","redis-servers"],"ha_mode":0.0,"icon_image":"","icon_image_alt":"","last_check":-1.0,"last_check_result":null,"last_hard_state":1.0,"last_hard_state_change":1506457527.0597529411,"last_reachable":true,"last_state":1.0,"last_state_change":1506457527.0597529411,"last_state_down":0.0,"last_state_type":0.0,"last_state_unreachable":0.0,"last_state_up":0.0,"max_check_attempts":3.0,"name":"bar.example.net","next_check":1506458067.9230570793,"notes":"","notes_url":"","original_attributes":null,"package":"_etc","paused":false,"retry_interval":60.0,"severity":24.0,"source_location":{"first_column":0.0,"first_line":1.0,"last_column":28.0,"last_line":1.0,"path":"/etc/icinga2/conf.d/servers/bar.example.net.conf"},"state":1.0,"state_type":0.0,"templates":["bar.example.net","generic-host"],"type":"Host","vars":{"by_ssh_port":22.0,"local_disks":["/"],"notification":{"mail":{"groups":["icingaadmins"]}},"os":"Linux","roles":["collectd","dirvish","icinga","mysql","nginx","php7","redis","salt-master","syslog"],"server_type":"openvzve"},"version":0.0,"volatile":false,"zone":""},"joins":{},"meta":{},"name":"bar.example.net","type":"Host"}]}'
-    http_version: 
-  recorded_at: Tue, 26 Sep 2017 20:31:37 GMT
-recorded_with: VCR 3.0.3
+      string: '
+      {
+        "results": [
+          {
+            "attrs": {
+              "__name": "foo.example.net",
+              "acknowledgement": 0,
+              "acknowledgement_expiry": 0,
+              "acknowledgement_last_change": 0,
+              "action_url": "",
+              "active": true,
+              "address": "127.0.0.1",
+              "address6": "",
+              "check_attempt": 1,
+              "check_command": "hostalive4",
+              "check_interval": 300,
+              "check_period": "",
+              "check_timeout": null,
+              "command_endpoint": "",
+              "display_name": "foo.example.net",
+              "downtime_depth": 0,
+              "enable_active_checks": true,
+              "enable_event_handler": true,
+              "enable_flapping": false,
+              "enable_notifications": true,
+              "enable_passive_checks": true,
+              "enable_perfdata": true,
+              "event_command": "",
+              "executions": null,
+              "flapping": false,
+              "flapping_current": 5.4,
+              "flapping_ignore_states": null,
+              "flapping_last_change": 0,
+              "flapping_threshold": 0,
+              "flapping_threshold_high": 30,
+              "flapping_threshold_low": 25,
+              "force_next_check": false,
+              "force_next_notification": false,
+              "groups": [
+                "docker-servers"
+              ],
+              "ha_mode": 0,
+              "handled": false,
+              "icon_image": "",
+              "icon_image_alt": "",
+              "last_check": 1698103410.964847,
+              "last_check_result": {
+                "active": true,
+                "check_source": "icinga2.example.net",
+                "command": [
+                  "/usr/lib/nagios/plugins/check_ping",
+                  "-4",
+                  "-H",
+                  "127.0.0.1",
+                  "-c",
+                  "5000,100%",
+                  "-w",
+                  "3000,80%"
+                ],
+                "execution_end": 1698103410.964728,
+                "execution_start": 1698103406.875167,
+                "exit_status": 0,
+                "output": "PING OK - Packet loss = 0%, RTA = 0.06 ms",
+                "performance_data": [
+                  "rta=0.056000ms;3000.000000;5000.000000;0.000000",
+                  "pl=0%;80;100;0;"
+                ],
+                "previous_hard_state": 99,
+                "schedule_end": 1698103410.964847,
+                "schedule_start": 1698103406.874645,
+                "scheduling_source": "icinga2.example.net",
+                "state": 0,
+                "ttl": 0,
+                "type": "CheckResult",
+                "vars_after": {
+                  "attempt": 1,
+                  "reachable": true,
+                  "state": 0,
+                  "state_type": 1
+                },
+                "vars_before": {
+                  "attempt": 1,
+                  "reachable": true,
+                  "state": 0,
+                  "state_type": 1
+                }
+              },
+              "last_hard_state": 0,
+              "last_hard_state_change": 1698101933.638521,
+              "last_reachable": true,
+              "last_state": 0,
+              "last_state_change": 1698101933.638521,
+              "last_state_down": 0,
+              "last_state_type": 1,
+              "last_state_unreachable": 0,
+              "last_state_up": 1698103410.964728,
+              "max_check_attempts": 3,
+              "name": "foo.example.net",
+              "next_check": 1698103696.474885,
+              "next_update": 1698104004.6550512,
+              "notes": "",
+              "notes_url": "",
+              "original_attributes": null,
+              "package": "_etc",
+              "paused": false,
+              "previous_state_change": 1698101933.638521,
+              "problem": false,
+              "retry_interval": 60,
+              "severity": 0,
+              "source_location": {
+                "first_column": 0,
+                "first_line": 1,
+                "last_column": 28,
+                "last_line": 1,
+                "path": "/etc/icinga2/conf.d/servers/foo.example.net.conf"
+              },
+              "state": 0,
+              "state_type": 1,
+              "templates": [
+                "foo.example.net",
+                "generic-host"
+              ],
+              "type": "Host",
+              "vars": {
+                "by_ssh_port": 22,
+                "config": {
+                  "services": [
+                    "docker"
+                  ]
+                },
+                "enable_pagerduty": true,
+                "notification": {
+                  "mail": {
+                    "groups": [
+                      "admins"
+                    ]
+                  }
+                }
+              },
+              "version": 0,
+              "volatile": false,
+              "zone": ""
+            },
+            "joins": {},
+            "meta": {},
+            "name": "foo.example.net",
+            "type": "Host"
+          },
+          {
+            "attrs": {
+              "__name": "bar.example.net",
+              "acknowledgement": 0,
+              "acknowledgement_expiry": 0,
+              "acknowledgement_last_change": 0,
+              "action_url": "",
+              "active": true,
+              "address": "127.0.0.1",
+              "address6": "",
+              "check_attempt": 1,
+              "check_command": "hostalive4",
+              "check_interval": 300,
+              "check_period": "",
+              "check_timeout": null,
+              "command_endpoint": "",
+              "display_name": "bar.example.net",
+              "downtime_depth": 0,
+              "enable_active_checks": true,
+              "enable_event_handler": true,
+              "enable_flapping": false,
+              "enable_notifications": true,
+              "enable_passive_checks": true,
+              "enable_perfdata": true,
+              "event_command": "",
+              "executions": null,
+              "flapping": false,
+              "flapping_current": 5.4,
+              "flapping_ignore_states": null,
+              "flapping_last_change": 0,
+              "flapping_threshold": 0,
+              "flapping_threshold_high": 30,
+              "flapping_threshold_low": 25,
+              "force_next_check": false,
+              "force_next_notification": false,
+              "groups": [
+                "docker-servers"
+              ],
+              "ha_mode": 0,
+              "handled": false,
+              "icon_image": "",
+              "icon_image_alt": "",
+              "last_check": 1698103382.388855,
+              "last_check_result": {
+                "active": true,
+                "check_source": "icinga2.example.net",
+                "command": [
+                  "/usr/lib/nagios/plugins/check_ping",
+                  "-4",
+                  "-H",
+                  "127.0.0.1",
+                  "-c",
+                  "5000,100%",
+                  "-w",
+                  "3000,80%"
+                ],
+                "execution_end": 1698103382.388748,
+                "execution_start": 1698103378.29933,
+                "exit_status": 0,
+                "output": "PING OK - Packet loss = 0%, RTA = 0.05 ms",
+                "performance_data": [
+                  "rta=0.051000ms;3000.000000;5000.000000;0.000000",
+                  "pl=0%;80;100;0;"
+                ],
+                "previous_hard_state": 99,
+                "schedule_end": 1698103382.388855,
+                "schedule_start": 1698103378.29883,
+                "scheduling_source": "icinga2.example.net",
+                "state": 0,
+                "ttl": 0,
+                "type": "CheckResult",
+                "vars_after": {
+                  "attempt": 1,
+                  "reachable": true,
+                  "state": 0,
+                  "state_type": 1
+                },
+                "vars_before": {
+                  "attempt": 1,
+                  "reachable": true,
+                  "state": 0,
+                  "state_type": 1
+                }
+              },
+              "last_hard_state": 0,
+              "last_hard_state_change": 1698101906.890755,
+              "last_reachable": true,
+              "last_state": 0,
+              "last_state_change": 1698101906.890755,
+              "last_state_down": 0,
+              "last_state_type": 1,
+              "last_state_unreachable": 0,
+              "last_state_up": 1698103382.388748,
+              "max_check_attempts": 3,
+              "name": "bar.example.net",
+              "next_check": 1698103667.898894,
+              "next_update": 1698103976.0787299,
+              "notes": "",
+              "notes_url": "",
+              "original_attributes": null,
+              "package": "_etc",
+              "paused": false,
+              "previous_state_change": 1698101906.890755,
+              "problem": false,
+              "retry_interval": 60,
+              "severity": 0,
+              "source_location": {
+                "first_column": 0,
+                "first_line": 1,
+                "last_column": 28,
+                "last_line": 1,
+                "path": "/etc/icinga2/conf.d/servers/bar.example.net.conf"
+              },
+              "state": 0,
+              "state_type": 1,
+              "templates": [
+                "bar.example.net",
+                "generic-host"
+              ],
+              "type": "Host",
+              "vars": {
+                "by_ssh_port": 22,
+                "config": {
+                  "services": [
+                    "docker"
+                  ]
+                },
+                "enable_pagerduty": true,
+                "notification": {
+                  "mail": {
+                    "groups": [
+                      "admins"
+                    ]
+                  }
+                }
+              },
+              "version": 0,
+              "volatile": false,
+              "zone": ""
+            },
+            "joins": {},
+            "meta": {},
+            "name": "bar.example.net",
+            "type": "Host"
+          }
+        ]
+      }
+      '
+  recorded_at: Mon, 23 Oct 2023 23:26:49 GMT
+recorded_with: VCR 6.2.0

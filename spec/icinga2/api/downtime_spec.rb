@@ -5,11 +5,11 @@ RSpec.describe Icinga2::API::Downtime do
   let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
   subject do
-    create_downtime('foo.example.net', 'ssh')
+    create_downtime('foo.example.net', 'dockerd|daemon')
     client.hosts
           .find('foo.example.net')
           .services
-          .find('ssh')
+          .find('dockerd|daemon')
           .downtimes
           .first
   end
@@ -25,7 +25,7 @@ RSpec.describe Icinga2::API::Downtime do
   describe '#to_s' do
     it 'should return Icinga2 downtime name' do
       VCR.use_cassette('single_host_with_downtimes', record: :new_episodes) do
-        expect(subject.to_s).to include('foo.example.net!ssh')
+        expect(subject.to_s).to include('foo.example.net!dockerd|daemon')
       end
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe Icinga2::API::Downtime do
   describe '#full_name' do
     it 'should return Icinga2 downtime full_name' do
       VCR.use_cassette('single_host_with_downtimes', record: :new_episodes) do
-        expect(subject.full_name).to include('foo.example.net!ssh')
+        expect(subject.full_name).to include('foo.example.net!dockerd|daemon')
       end
     end
   end

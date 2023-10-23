@@ -4,7 +4,7 @@ RSpec.describe Icinga2::API::Service do
 
   let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
-  subject { client.hosts.find('foo.example.net').services.find('ssh') }
+  subject { client.hosts.find('foo.example.net').services.find('dockerd|daemon') }
 
   describe '#api_client' do
     it 'should return the previous defined client' do
@@ -17,7 +17,7 @@ RSpec.describe Icinga2::API::Service do
   describe '#to_s' do
     it 'should return Icinga2 service name' do
       VCR.use_cassette('single_host_with_services', record: :new_episodes) do
-        expect(subject.to_s).to eq 'foo.example.net!ssh'
+        expect(subject.to_s).to eq 'foo.example.net!dockerd|daemon'
       end
     end
   end
@@ -26,7 +26,7 @@ RSpec.describe Icinga2::API::Service do
     it 'should return service attributes as a hash' do
       VCR.use_cassette('single_host_with_services', record: :new_episodes) do
         expect(subject.to_h).to be_a(Hash)
-        expect(subject.to_h[:name]).to eq 'ssh'
+        expect(subject.to_h[:name]).to eq 'dockerd|daemon'
       end
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe Icinga2::API::Service do
   describe '#full_name' do
     it 'should return Icinga2 service full_name' do
       VCR.use_cassette('single_host_with_services', record: :new_episodes) do
-        expect(subject.full_name).to eq 'foo.example.net!ssh'
+        expect(subject.full_name).to eq 'foo.example.net!dockerd|daemon'
       end
     end
   end
@@ -53,12 +53,11 @@ RSpec.describe Icinga2::API::Service do
     context 'when Icinga2 downtimes exist' do
       it 'should return all Icinga2 downtimes for the service' do
         VCR.use_cassette('service_with_downtimes', record: :new_episodes) do
-          create_downtime('foo.example.net', 'ssh')
-          create_downtime('foo.example.net', 'Daemon SyslogNG')
+          create_downtime('foo.example.net', 'dockerd|daemon')
           downtimes = subject.downtimes
 
           expect(downtimes.size).to eq 1
-          expect(downtimes.first.to_s).to include('foo.example.net!ssh')
+          expect(downtimes.first.to_s).to include('foo.example.net!dockerd|daemon')
         end
       end
     end
