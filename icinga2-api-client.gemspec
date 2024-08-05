@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.version     = Icinga2::API::VERSION::STRING
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Nicolas Rodriguez']
-  s.email       = ['nrodriguez@jbox-web.com']
-  s.homepage    = 'https://github.com/jbox-web/active_use_case'
+  s.email       = ['nico@nicoladmin.fr']
+  s.homepage    = 'https://github.com/jbox-web/icinga2-api-client'
   s.summary     = 'Interface to interact with the Icinga2 API'
   s.license     = 'MIT'
 
@@ -16,16 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split("\n")
 
-  s.add_runtime_dependency 'activesupport', '>= 6.0'
-  s.add_runtime_dependency 'faraday'
-  s.add_runtime_dependency 'zeitwerk'
-
-  s.add_development_dependency 'guard-rspec'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'vcr'
-  s.add_development_dependency 'webmock'
+  s.add_dependency 'activesupport', '>= 6.0'
+  s.add_dependency 'faraday'
+  s.add_dependency 'zeitwerk'
 end
