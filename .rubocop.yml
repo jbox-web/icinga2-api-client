@@ -1,20 +1,32 @@
 ---
 require:
   - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
 
 AllCops:
   NewCops: enable
-  SuggestExtensions: false
   TargetRubyVersion: 3.0
   Exclude:
     - bin/*
     - spec/**/*
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+#########
+# STYLE #
+#########
 
 Style/Documentation:
   Enabled: false
 
 Style/RedundantBegin:
   Enabled: false
+
+##########
+# LAYOUT #
+##########
 
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
@@ -23,4 +35,4 @@ Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
 Layout/LineLength:
-  Max: 115
+  Max: 125

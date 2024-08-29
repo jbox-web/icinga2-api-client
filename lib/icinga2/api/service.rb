@@ -8,7 +8,7 @@ module Icinga2
 
       def initialize(args = {})
         @host = args.delete(:host)
-        super(args)
+        super
       end
 
       def full_name

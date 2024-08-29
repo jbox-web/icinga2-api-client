@@ -13,7 +13,7 @@ module Icinga2
         args['start_time'] = Time.at(args['start_time'].to_i)
         args['end_time']   = Time.at(args['end_time'].to_i)
 
-        super(args)
+        super
       end
 
       def full_name
