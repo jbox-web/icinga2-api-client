@@ -16,3 +16,6 @@ gemfiles/*.lock
 
 # RVM files
 /.ruby-version
+
+# Ignore MacOS files
+.DS_Store
