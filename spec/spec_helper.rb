@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 require 'rspec'
 require 'vcr'
@@ -31,7 +33,7 @@ def icinga_credentials
   { version: 'v1', username: 'root', password: ENV.fetch('ICINGA_API_PASSWORD', 'root'), verify_ssl: false }
 end
 
-def create_downtime(host, service)
+def create_downtime(host, service) # rubocop:disable Metrics/MethodLength
   duration   = 300
   start_time = DateTime.now
   end_time   = start_time + duration

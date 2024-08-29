@@ -9,7 +9,6 @@ AllCops:
   TargetRubyVersion: 3.0
   Exclude:
     - bin/*
-    - spec/**/*
 
 Gemspec/RequireMFA:
   Enabled: false
@@ -24,15 +23,41 @@ Style/Documentation:
 Style/RedundantBegin:
   Enabled: false
 
+Style/BlockDelimiters:
+  AllowedPatterns: ['expect']
+
 ##########
 # LAYOUT #
 ##########
 
-Layout/EmptyLinesAroundModuleBody:
+Layout/LineLength:
+  Max: 125
+
+Layout/EmptyLines:
+  Enabled: false
+
+Layout/EmptyLineBetweenDefs:
   Enabled: false
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 
-Layout/LineLength:
-  Max: 125
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
+#########
+# RSPEC #
+#########
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+RSpec/ExampleLength:
+  Max: 8
