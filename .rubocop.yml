@@ -26,6 +26,12 @@ Style/RedundantBegin:
 Style/BlockDelimiters:
   AllowedPatterns: ['expect']
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+Naming/BlockForwarding:
+  EnforcedStyle: explicit
+
 ##########
 # LAYOUT #
 ##########
