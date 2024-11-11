@@ -4,14 +4,16 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'guard-rspec'
-gem 'pry'
+# Dev libs
 gem 'rake'
 gem 'rspec'
-gem 'rubocop'
-gem 'rubocop-performance'
-gem 'rubocop-rake'
-gem 'rubocop-rspec'
 gem 'simplecov'
 gem 'vcr'
 gem 'webmock'
+
+# Dev tools / linter
+gem 'guard-rspec',         require: false
+gem 'rubocop',             require: false
+gem 'rubocop-performance', require: false
+gem 'rubocop-rake',        require: false
+gem 'rubocop-rspec',       require: false
