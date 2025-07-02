@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+require 'simplecov_json_formatter'
 require 'vcr'
 
 # Start Simplecov
 SimpleCov.start do
+  formatter SimpleCov::Formatter::JSONFormatter
   add_filter 'spec/'
 end
 
