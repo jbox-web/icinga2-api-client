@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Interface to interact with the Icinga2 API'
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 3.1.0'
+  s.required_ruby_version = '>= 3.2.0'
 
   s.files = Dir['README.md', 'LICENSE', 'lib/**/*.rb']
 
