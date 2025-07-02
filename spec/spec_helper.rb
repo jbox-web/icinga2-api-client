@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-require 'rspec'
 require 'vcr'
 
 # Start Simplecov
@@ -17,6 +16,9 @@ end
 
 # Configure RSpec
 RSpec.configure do |config|
+  config.color = true
+  config.fail_fast = false
+
   config.order = :random
   Kernel.srand config.seed
 
