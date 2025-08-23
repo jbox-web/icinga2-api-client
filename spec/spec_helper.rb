@@ -6,7 +6,7 @@ require 'vcr'
 
 # Start Simplecov
 SimpleCov.start do
-  formatter SimpleCov::Formatter::JSONFormatter
+  formatter SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatter::JSONFormatter])
   add_filter 'spec/'
 end
 
