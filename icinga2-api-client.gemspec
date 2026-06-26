@@ -14,9 +14,15 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 3.2.0'
 
-  s.files = Dir['README.md', 'LICENSE', 'lib/**/*.rb']
+  s.metadata = {
+    'source_code_uri' => 'https://github.com/jbox-web/icinga2-api-client',
+    'changelog_uri'   => 'https://github.com/jbox-web/icinga2-api-client/blob/master/CHANGELOG.md',
+    'bug_tracker_uri' => 'https://github.com/jbox-web/icinga2-api-client/issues'
+  }
+
+  s.files = Dir['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/**/*.rb']
 
   s.add_dependency 'activesupport', '>= 7.0'
-  s.add_dependency 'faraday'
-  s.add_dependency 'zeitwerk'
+  s.add_dependency 'faraday', '~> 2.0'
+  s.add_dependency 'zeitwerk', '~> 2.6'
 end
