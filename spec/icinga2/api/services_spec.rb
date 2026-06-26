@@ -60,6 +60,16 @@ RSpec.describe Icinga2::API::Services do
           expect(downtimes.first.to_s).to include('foo.example.net!dockerd|daemon')
         end
       end
+
+      it 'associates each downtime with its service' do
+        VCR.use_cassette('single_host_with_downtimes', record: :new_episodes) do
+          create_downtime('foo.example.net', 'dockerd|daemon')
+          downtime = all_services.downtimes.first
+
+          expect(downtime.service).to be_a(Icinga2::API::Service)
+          expect(downtime.service.name).to eq 'dockerd|daemon'
+        end
+      end
     end
   end
 end

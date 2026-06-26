@@ -4,18 +4,41 @@ module Icinga2
   module API
     class Interface
 
-      attr_accessor :base_url, :username, :password, :version, :ssl_options, :logging, :logger, :logger_options, :enable_logs
+      # Maps Faraday transport errors to this gem's error hierarchy.
+      # Order matters: most specific errors must come first (e.g.
+      # Faraday::TimeoutError < Faraday::ServerError and
+      # Faraday::ResourceNotFound < Faraday::ClientError).
+      FARADAY_ERRORS = {
+        Faraday::TimeoutError     => Error::Timeout,
+        Faraday::ConnectionFailed => Error::ConnectionFailed,
+        Faraday::ResourceNotFound => Error::NotFound,
+        Faraday::ClientError      => Error::ClientError,
+        Faraday::ServerError      => Error::ServerError
+      }.freeze
+
+      attr_accessor :base_url, :username, :password, :version, :ssl_options, :open_timeout, :timeout, :logging
 
       def initialize(args = {})
-        @base_url       = args.fetch(:base_url)
-        @username       = args.fetch(:username)
-        @password       = args.fetch(:password)
-        @version        = args.fetch(:version, 'v1')
-        @ssl_options    = args.fetch(:ssl_options, {})
-        @logging        = args.fetch(:logging, {})
-        @logger         = logging.fetch(:logger, nil)
-        @logger_options = logging.fetch(:options, {})
-        @enable_logs    = logging.fetch(:enabled, false)
+        @base_url     = args.fetch(:base_url)
+        @username     = args.fetch(:username)
+        @password     = args.fetch(:password)
+        @version      = args.fetch(:version, 'v1')
+        @ssl_options  = args.fetch(:ssl_options, {})
+        @open_timeout = args.fetch(:open_timeout, nil)
+        @timeout      = args.fetch(:timeout, nil)
+        @logging      = args.fetch(:logging, {})
+      end
+
+      def logger
+        logging.fetch(:logger, nil)
+      end
+
+      def logger_options
+        logging.fetch(:options, {})
+      end
+
+      def enable_logs
+        logging.fetch(:enabled, false)
       end
 
       def get(path, query: {})
@@ -23,7 +46,7 @@ module Icinga2
         url = build_url(path, query)
 
         # Send request
-        client.get(url).body['results']
+        with_error_handling { client.get(url).body['results'] }
       end
 
       def post(path, query: {}, params: {}, headers: {})
@@ -31,10 +54,19 @@ module Icinga2
         url     = build_url(path, query)
         headers = headers.merge(accept: 'application/json')
 
-        client.post(url, params.to_json, headers).body['results']
+        with_error_handling { client.post(url, params.to_json, headers).body['results'] }
       end
 
       private
+
+      # Translate Faraday transport errors into the gem's own error hierarchy
+      # so callers never have to rescue Faraday-specific exceptions.
+      def with_error_handling
+        yield
+      rescue Faraday::Error => e
+        _, error_class = FARADAY_ERRORS.find { |faraday_error, _| e.is_a?(faraday_error) }
+        raise (error_class || Error), e.message
+      end
 
       def build_url(path, query = {})
         url = "#{base_url}/#{version}#{path}"
@@ -46,7 +78,9 @@ module Icinga2
       end
 
       def client
-        @client ||= Faraday.new(base_url, ssl: ssl_options) do |builder|
+        request_options = { open_timeout: open_timeout, timeout: timeout }.compact
+
+        @client ||= Faraday.new(base_url, ssl: ssl_options, request: request_options) do |builder|
           builder.request :authorization, :basic, username, password
           builder.request :json
           builder.response :raise_error

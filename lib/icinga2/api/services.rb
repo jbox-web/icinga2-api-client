@@ -46,7 +46,7 @@ module Icinga2
       end
 
       def build_downtime(attrs)
-        Downtime.new attrs.merge(api_client: api_client, host: host, service: find(attrs['name']))
+        Downtime.new attrs.merge(api_client: api_client, host: host, service: find(attrs['service_name']))
       end
 
     end

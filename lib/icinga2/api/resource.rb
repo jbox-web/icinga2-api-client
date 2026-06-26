@@ -61,7 +61,7 @@ module Icinga2
       private
 
       def filter_hash(except = [], only = [])
-        hash = @attributes
+        hash = @attributes.dup
         hash.reject! { |key, _| except.include?(key.to_sym) || except.include?(key.to_s) } unless except.empty?
         hash.reject! { |key, _| !only.include?(key.to_sym) && !only.include?(key.to_s) } unless only.empty?
         hash

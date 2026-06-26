@@ -1,0 +1,29 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://icinga2.example.net:5665/v1/objects/hosts?host=empty.example.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - "*/*"
+      Host:
+      - icinga2.example.net:5665
+      Authorization:
+      - Basic foobar
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Icinga/r2.14.0-1
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"results":[]}'
+  recorded_at: Mon, 23 Oct 2023 23:26:49 GMT
+recorded_with: VCR 6.2.0

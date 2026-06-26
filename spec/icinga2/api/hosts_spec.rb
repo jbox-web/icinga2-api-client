@@ -55,5 +55,14 @@ RSpec.describe Icinga2::API::Hosts do
         end
       end
     end
+
+    context 'when Icinga2 returns an empty result set' do
+      it 'returns nil' do
+        VCR.use_cassette('find_empty_host') do
+          host = all_hosts.find('empty.example.net')
+          expect(host).to be_nil
+        end
+      end
+    end
   end
 end

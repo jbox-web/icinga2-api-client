@@ -18,11 +18,11 @@ module Icinga2
       def find(hostname)
         begin
           hosts = api_client.api.get('/objects/hosts', query: { host: hostname })
-        rescue Faraday::ResourceNotFound => _e
+        rescue Icinga2::API::Error::NotFound => _e
           nil
         else
           host = hosts.first
-          build_host(host['attrs'])
+          build_host(host['attrs']) if host
         end
       end
 

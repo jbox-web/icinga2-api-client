@@ -32,6 +32,13 @@ RSpec.describe Icinga2::API::Resource do
         expect(resource.to_hash(only: ['foo'])).to eq({ foo: 'bar' })
       end
     end
+
+    context 'when called with a filter' do
+      it 'does not mutate the stored attributes' do
+        resource.to_hash(only: ['foo'])
+        expect(resource.to_hash).to eq({ foo: 'bar', bar: 'foo' })
+      end
+    end
   end
 
   describe '#dynamic_method' do
