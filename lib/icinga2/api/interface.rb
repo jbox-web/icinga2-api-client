@@ -16,9 +16,14 @@ module Icinga2
         Faraday::ServerError      => Error::ServerError
       }.freeze
 
+      KNOWN_OPTIONS = %i[base_url username password version ssl_options open_timeout timeout logging].freeze
+
       attr_accessor :base_url, :username, :password, :version, :ssl_options, :open_timeout, :timeout, :logging
 
       def initialize(args = {})
+        unknown = args.keys - KNOWN_OPTIONS
+        raise ArgumentError, "unknown options: #{unknown.join(', ')}" unless unknown.empty?
+
         @base_url     = args.fetch(:base_url)
         @username     = args.fetch(:username)
         @password     = args.fetch(:password)

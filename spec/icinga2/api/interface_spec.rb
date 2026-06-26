@@ -12,6 +12,14 @@ RSpec.describe Icinga2::API::Interface do
 
   after { WebMock.reset! }
 
+  describe 'option validation' do
+    it 'rejects unknown options' do
+      expect {
+        described_class.new(base_url: 'x', username: 'u', password: 'p', verify_ssl: false)
+      }.to raise_error(ArgumentError, /verify_ssl/)
+    end
+  end
+
   describe 'error translation' do
     def stub_status(code, body = '{}')
       stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/hosts')
@@ -60,6 +68,17 @@ RSpec.describe Icinga2::API::Interface do
         .with(query: { 'filter' => 'service.host_name=="web01"' })
         .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
       expect(interface.get('/objects/services', query: { filter: 'service.host_name=="web01"' })).to eq []
+    end
+  end
+
+  describe '#post' do
+    it 'sends params as a JSON body and merges the given headers' do
+      stub_request(:post, 'https://icinga2.example.net:5665/v1/objects/downtimes')
+        .with(body: '{"filter":"x"}', headers: { 'X-HTTP-Method-Override' => 'GET' })
+        .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
+
+      result = interface.post('/objects/downtimes', params: { filter: 'x' }, headers: { 'X-HTTP-Method-Override' => 'GET' })
+      expect(result).to eq []
     end
   end
 

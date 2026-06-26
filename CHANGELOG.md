@@ -19,6 +19,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Configurable `open_timeout` / `timeout` connection options.
 - `Service#schedule_downtime` validates required parameters and raises
   `ArgumentError` when any is missing.
+- Client/connection options are validated: an unknown option (e.g. a typo
+  like `verify_ssl` instead of `ssl_options`) now raises `ArgumentError`
+  instead of being silently ignored.
 - Read-only live integration specs (`spec/integration/`, opt-in via
   `ICINGA_INTEGRATION=1`).
 - Gemspec metadata (source code, changelog, bug tracker URIs).

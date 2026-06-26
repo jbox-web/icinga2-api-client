@@ -42,7 +42,7 @@ RSpec.configure do |config|
 end
 
 def icinga_credentials
-  { version: 'v1', username: 'root', password: ENV.fetch('ICINGA_API_PASSWORD', 'root'), verify_ssl: false }
+  { version: 'v1', username: 'root', password: ENV.fetch('ICINGA_API_PASSWORD', 'root'), ssl_options: { verify: false } }
 end
 
 def create_downtime(host, service) # rubocop:disable Metrics/MethodLength
