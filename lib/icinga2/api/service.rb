@@ -4,7 +4,7 @@ module Icinga2
   module API
     class Service < Icinga2::API::Resource
 
-      include Icinga2::API::DowntimeScheduling
+      include Icinga2::API::Actions
 
       attr_reader :host
 
@@ -19,14 +19,6 @@ module Icinga2
 
       alias to_s full_name
 
-      def schedule_downtime(opts = {})
-        validate_downtime_params!(opts)
-
-        opts    = opts.merge(filter: "service.name==\"#{name}\" && service.host_name==\"#{host.name}\"")
-        results = api_client.api.post('/actions/schedule-downtime', query: { type: 'Service' }, params: opts)
-        build_scheduled_downtime(results, host: host, service: self)
-      end
-
       def downtimes
         fetch_downtimes.collect do |downtime_attributes|
           build_downtime(downtime_attributes['attrs'])
@@ -35,8 +27,20 @@ module Icinga2
 
       private
 
+      def action_type
+        'Service'
+      end
+
+      def action_filter
+        "service.name==\"#{name}\" && service.host_name==\"#{host.name}\""
+      end
+
+      def build_scheduled_downtime(name)
+        Downtime.new('__name' => name, api_client: api_client, host: host, service: self)
+      end
+
       def fetch_downtimes
-        opts    = { filter: "service.name==\"#{name}\" && service.host_name==\"#{host.name}\"" }
+        opts    = { filter: action_filter }
         headers = { 'X-HTTP-Method-Override' => 'GET' }
         api_client.api.post('/objects/downtimes', params: opts, headers: headers)
       end

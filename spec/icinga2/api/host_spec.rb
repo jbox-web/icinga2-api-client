@@ -32,6 +32,22 @@ RSpec.describe Icinga2::API::Host do
     end
   end
 
+  describe '#acknowledge' do
+    include WebMock::API
+
+    subject(:built_host) { described_class.new(name: 'foo.example.net', api_client: client) }
+
+    after { WebMock.reset! }
+
+    it 'acknowledges the host problem' do
+      stub_request(:post, %r{/v1/actions/acknowledge-problem}).to_return(
+        status: 200, body: '{"results":[{"code":200,"status":"ok"}]}', headers: { 'Content-Type' => 'application/json' }
+      )
+
+      expect(built_host.acknowledge(author: 'a', comment: 'c')).to be_a(Hash)
+    end
+  end
+
   describe '#downtimes' do
     include WebMock::API
 

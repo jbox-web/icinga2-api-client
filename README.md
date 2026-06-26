@@ -218,6 +218,21 @@ client.hosts.find('web01').services.find('ssh').downtimes
 client.hosts.find('web01').downtimes
 ```
 
+#### Acknowledge a problem
+
+```ruby
+# author and comment are required
+client.hosts.find('web01').services.find('ssh').acknowledge(
+  author: 'admin', comment: 'Looking into it'
+)
+
+# Hosts can be acknowledged too
+client.hosts.find('web01').acknowledge(author: 'admin', comment: 'On it')
+
+# Remove an acknowledgement
+client.hosts.find('web01').services.find('ssh').remove_acknowledgement
+```
+
 #### Cancel a downtime
 
 ```ruby

@@ -8,12 +8,17 @@ RSpec.describe Icinga2::API::Service do
 
   let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
-  describe '#schedule_downtime' do
-    subject(:built_service) do
-      host = Icinga2::API::Host.new(name: 'foo.example.net', api_client: client)
-      described_class.new(api_client: client, host: host, '__name' => 'foo.example.net!ssh', 'name' => 'ssh')
-    end
+  let(:built_service) do
+    host = Icinga2::API::Host.new(name: 'foo.example.net', api_client: client)
+    described_class.new(api_client: client, host: host, '__name' => 'foo.example.net!ssh', 'name' => 'ssh')
+  end
 
+  def stub_action(action, body = '{"results":[{"code":200,"status":"ok"}]}')
+    stub_request(:post, %r{/v1/actions/#{action}})
+      .to_return(status: 200, body: body, headers: { 'Content-Type' => 'application/json' })
+  end
+
+  describe '#schedule_downtime' do
     it 'raises ArgumentError when required parameters are missing' do
       expect { built_service.schedule_downtime(author: 'admin') }
         .to raise_error(ArgumentError, /comment/)
@@ -25,16 +30,38 @@ RSpec.describe Icinga2::API::Service do
       after { WebMock.reset! }
 
       it 'returns the created Downtime' do
-        stub_request(:post, %r{/v1/actions/schedule-downtime}).to_return(
-          status:  200,
-          body:    '{"results":[{"code":200,"name":"foo.example.net!ssh!uuid","status":"ok"}]}',
-          headers: { 'Content-Type' => 'application/json' }
-        )
+        stub_action('schedule-downtime', '{"results":[{"code":200,"name":"foo.example.net!ssh!uuid","status":"ok"}]}')
 
         downtime = built_service.schedule_downtime(author: 'a', comment: 'c', start_time: 1, end_time: 2, duration: 3)
         expect(downtime).to be_a(Icinga2::API::Downtime)
         expect(downtime.full_name).to eq 'foo.example.net!ssh!uuid'
       end
+    end
+  end
+
+  describe '#acknowledge' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'raises ArgumentError when required parameters are missing' do
+      expect { built_service.acknowledge(author: 'admin') }.to raise_error(ArgumentError, /comment/)
+    end
+
+    it 'acknowledges the problem and returns the result' do
+      stub_action('acknowledge-problem')
+      expect(built_service.acknowledge(author: 'a', comment: 'c')).to be_a(Hash)
+    end
+  end
+
+  describe '#remove_acknowledgement' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'removes the acknowledgement and returns the result' do
+      stub_action('remove-acknowledgement')
+      expect(built_service.remove_acknowledgement).to be_a(Hash)
     end
   end
 

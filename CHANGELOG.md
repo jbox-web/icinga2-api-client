@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `#acknowledge` and `#remove_acknowledgement` on both `Host` and `Service`
+  (`acknowledge-problem` / `remove-acknowledgement` actions).
 - `Host#schedule_downtime` and `Host#downtimes` (host-level downtimes), mirroring
   the service-level API.
 - `Service#schedule_downtime` / `Host#schedule_downtime` now return the created
