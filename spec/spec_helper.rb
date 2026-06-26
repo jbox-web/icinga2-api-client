@@ -39,6 +39,9 @@ RSpec.configure do |config|
   # Integration specs hit a real Icinga2 server and are excluded by default.
   # Run them with: ICINGA_INTEGRATION=1 ICINGA_API_URL=... ICINGA_API_USER=... ICINGA_API_PASSWORD=... bin/rspec
   config.filter_run_excluding(:integration) unless ENV['ICINGA_INTEGRATION']
+
+  # Write integration specs additionally mutate state on the server; doubly gated.
+  config.filter_run_excluding(:integration_write) unless ENV['ICINGA_INTEGRATION_WRITE']
 end
 
 def icinga_credentials
