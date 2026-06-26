@@ -12,7 +12,7 @@ module Icinga2
 
       def all
         hosts = api_client.api.get('/objects/hosts')
-        hosts.map { |h| build_host(h['attrs']) }
+        hosts.filter_map { |h| build_host(h['attrs']) if h['attrs'] }
       end
 
       def find(hostname)

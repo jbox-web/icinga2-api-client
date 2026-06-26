@@ -13,8 +13,11 @@ module Icinga2
       end
 
       def attributes=(args = {})
+        # Write straight into the store: going through send(:"#{key}=") would
+        # collide with real methods when an Icinga attribute is named like one
+        # (e.g. "attributes").
         args.each do |key, value|
-          send(:"#{key}=", value)
+          @attributes[key.to_sym] = value
         end
       end
 
@@ -32,7 +35,7 @@ module Icinga2
       end
 
       def respond_to_missing?(method_name, include_private = false)
-        @attributes.key?(method_name) || super
+        method_name.to_s.end_with?('=') || @attributes.key?(method_name) || super
       end
 
       def to_hash(opts = {})

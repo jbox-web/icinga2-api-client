@@ -10,8 +10,8 @@ module Icinga2
         @service = args.delete(:service)
         @host    = args.delete(:host)
 
-        args['start_time'] = Time.at(args['start_time'].to_i)
-        args['end_time']   = Time.at(args['end_time'].to_i)
+        args['start_time'] = Time.at(args['start_time'].to_i) if args.key?('start_time')
+        args['end_time']   = Time.at(args['end_time'].to_i) if args.key?('end_time')
 
         super
       end
@@ -24,6 +24,8 @@ module Icinga2
 
       def cancel
         result = api_client.api.post('/actions/remove-downtime', query: { downtime: full_name })
+        raise Error, "downtime '#{full_name}' was not cancelled" if result.empty?
+
         result.first
       end
 

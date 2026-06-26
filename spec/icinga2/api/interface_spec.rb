@@ -37,6 +37,13 @@ RSpec.describe Icinga2::API::Interface do
       stub_status(500)
       expect { interface.get('/objects/hosts') }.to raise_error(Icinga2::API::Error)
     end
+
+    it 'exposes the HTTP response on the raised error' do
+      stub_status(404, '{"error":404}')
+      expect { interface.get('/objects/hosts') }.to raise_error(Icinga2::API::Error) do |error|
+        expect(error.response[:status]).to eq 404
+      end
+    end
   end
 
   describe 'request URL building' do

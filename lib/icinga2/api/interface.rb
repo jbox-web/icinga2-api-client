@@ -72,7 +72,7 @@ module Icinga2
         yield
       rescue Faraday::Error => e
         _, error_class = FARADAY_ERRORS.find { |faraday_error, _| e.is_a?(faraday_error) }
-        raise (error_class || Error), e.message
+        raise (error_class || Error).new(e.message, response: e.response)
       end
 
       def build_url(path, query = {})

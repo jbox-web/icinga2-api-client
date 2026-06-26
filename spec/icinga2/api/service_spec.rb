@@ -8,6 +8,18 @@ RSpec.describe Icinga2::API::Service do
 
   let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
+  describe '#schedule_downtime' do
+    subject(:built_service) do
+      host = Icinga2::API::Host.new(name: 'foo.example.net', api_client: client)
+      described_class.new(api_client: client, host: host, '__name' => 'foo.example.net!ssh', 'name' => 'ssh')
+    end
+
+    it 'raises ArgumentError when required parameters are missing' do
+      expect { built_service.schedule_downtime(author: 'admin') }
+        .to raise_error(ArgumentError, /comment/)
+    end
+  end
+
   describe '#api_client' do
     it 'returns the previous defined client' do
       VCR.use_cassette('single_host_with_services') do

@@ -8,6 +8,27 @@ RSpec.describe Icinga2::API::Services do
 
   let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
+  describe 'freshness' do
+    include WebMock::API
+
+    subject(:services) { described_class.new(api_client: client, host: host) }
+
+    let(:host) { Icinga2::API::Host.new(name: 'foo.example.net', api_client: client) }
+
+    after { WebMock.reset! }
+
+    it 'refetches services on every #all call (no stale cache)' do
+      headers = { 'Content-Type' => 'application/json' }
+      stub_request(:get, %r{/v1/objects/services}).to_return(
+        { status: 200, body: '{"results":[{"attrs":{"name":"a"}}]}', headers: headers },
+        { status: 200, body: '{"results":[{"attrs":{"name":"b"}}]}', headers: headers }
+      )
+
+      expect(services.all.map(&:name)).to eq ['a']
+      expect(services.all.map(&:name)).to eq ['b']
+    end
+  end
+
   describe '#all' do
     it 'returns all Icinga2 services for the host' do
       VCR.use_cassette('single_host_with_services') do

@@ -14,7 +14,7 @@ module Icinga2
       # Icinga only accept double quote in query string
       # https://www.icinga.com/docs/icinga2/latest/doc/12-icinga2-api/#advanced-filters
       def all
-        @all ||= fetch_services.collect do |service_attributes|
+        fetch_services.collect do |service_attributes|
           build_service(service_attributes['attrs'])
         end
       end
@@ -24,8 +24,14 @@ module Icinga2
       end
 
       def downtimes
-        @downtimes ||= fetch_downtimes.collect do |downtime_attributes|
-          build_downtime(downtime_attributes['attrs'])
+        raw = fetch_downtimes
+        return [] if raw.empty?
+
+        # Resolve services once instead of per downtime (avoids N+1).
+        services_by_name = all.to_h { |service| [service.name, service] }
+        raw.collect do |downtime_attributes|
+          attrs = downtime_attributes['attrs']
+          build_downtime(attrs, services_by_name[attrs['service_name']])
         end
       end
 
@@ -45,8 +51,8 @@ module Icinga2
         Service.new attrs.merge(api_client: api_client, host: host)
       end
 
-      def build_downtime(attrs)
-        Downtime.new attrs.merge(api_client: api_client, host: host, service: find(attrs['service_name']))
+      def build_downtime(attrs, service)
+        Downtime.new attrs.merge(api_client: api_client, host: host, service: service)
       end
 
     end

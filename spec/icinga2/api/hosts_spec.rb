@@ -14,6 +14,23 @@ RSpec.describe Icinga2::API::Hosts do
     end
   end
 
+  describe '#all robustness' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'skips result entries that have no attrs' do
+      stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/hosts').to_return(
+        status:  200,
+        body:    '{"results":[{"attrs":{"name":"ok.example.net"}},{"name":"broken"}]}',
+        headers: { 'Content-Type' => 'application/json' }
+      )
+
+      hosts = all_hosts.all
+      expect(hosts.map(&:name)).to eq ['ok.example.net']
+    end
+  end
+
   describe '#all' do
     it 'returns all Icinga2 hosts' do
       VCR.use_cassette('all_hosts') do
