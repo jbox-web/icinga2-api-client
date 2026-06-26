@@ -8,10 +8,11 @@ module Icinga2
     #   - #action_type   => "Host" or "Service"
     #   - #action_filter => the Icinga2 filter selecting this object
     #   - #build_scheduled_downtime(name) => a Downtime for the given name
+    #   - #build_comment(name) => a Comment for the given name
     module Actions
 
       REQUIRED_DOWNTIME_PARAMS = %i[author comment start_time end_time duration].freeze
-      REQUIRED_ACK_PARAMS      = %i[author comment].freeze
+      AUTHOR_COMMENT_PARAMS    = %i[author comment].freeze
 
       def schedule_downtime(opts = {})
         require_action_params!(opts, REQUIRED_DOWNTIME_PARAMS)
@@ -20,12 +21,22 @@ module Icinga2
       end
 
       def acknowledge(opts = {})
-        require_action_params!(opts, REQUIRED_ACK_PARAMS)
+        require_action_params!(opts, AUTHOR_COMMENT_PARAMS)
         run_action('acknowledge-problem', opts).first
       end
 
       def remove_acknowledgement(opts = {})
         run_action('remove-acknowledgement', opts).first
+      end
+
+      def add_comment(opts = {})
+        require_action_params!(opts, AUTHOR_COMMENT_PARAMS)
+        build_comment(run_action('add-comment', opts).first['name'])
+      end
+
+      def send_notification(opts = {})
+        require_action_params!(opts, AUTHOR_COMMENT_PARAMS)
+        run_action('send-custom-notification', opts).first
       end
 
       private

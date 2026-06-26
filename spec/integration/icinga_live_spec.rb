@@ -52,6 +52,10 @@ RSpec.describe 'Icinga2 live API', :integration do # rubocop:disable RSpec/Descr
     it 'lists host-level downtimes' do
       expect(client.hosts.find('foo.example.net').downtimes).to be_a(Array)
     end
+
+    it 'lists host-level comments' do
+      expect(client.hosts.find('foo.example.net').comments).to be_a(Array)
+    end
   end
 
   describe 'services' do

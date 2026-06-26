@@ -48,6 +48,23 @@ RSpec.describe Icinga2::API::Host do
     end
   end
 
+  describe '#add_comment' do
+    include WebMock::API
+
+    subject(:built_host) { described_class.new(name: 'foo.example.net', api_client: client) }
+
+    after { WebMock.reset! }
+
+    it 'returns the created Comment' do
+      stub_request(:post, %r{/v1/actions/add-comment}).to_return(
+        status: 200, body: '{"results":[{"code":200,"name":"foo.example.net!cuuid","status":"ok"}]}',
+        headers: { 'Content-Type' => 'application/json' }
+      )
+
+      expect(built_host.add_comment(author: 'a', comment: 'c').full_name).to eq 'foo.example.net!cuuid'
+    end
+  end
+
   describe '#downtimes' do
     include WebMock::API
 
@@ -61,6 +78,22 @@ RSpec.describe Icinga2::API::Host do
         .to_return(status: 200, body: body, headers: { 'Content-Type' => 'application/json' })
 
       expect(built_host.downtimes.map(&:full_name)).to eq ['foo.example.net!uuid']
+    end
+  end
+
+  describe '#comments' do
+    include WebMock::API
+
+    subject(:built_host) { described_class.new(name: 'foo.example.net', api_client: client) }
+
+    after { WebMock.reset! }
+
+    it 'lists the host-level comments' do
+      body = '{"results":[{"attrs":{"__name":"foo.example.net!cuuid"}}]}'
+      stub_request(:post, %r{/v1/objects/comments})
+        .to_return(status: 200, body: body, headers: { 'Content-Type' => 'application/json' })
+
+      expect(built_host.comments.map(&:full_name)).to eq ['foo.example.net!cuuid']
     end
   end
 

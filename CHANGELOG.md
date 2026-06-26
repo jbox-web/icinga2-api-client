@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 - `#acknowledge` and `#remove_acknowledgement` on both `Host` and `Service`
   (`acknowledge-problem` / `remove-acknowledgement` actions).
+- Comments: `#add_comment` (returns a `Comment`), `#comments` listing on
+  `Host`/`Service`, and `Comment#remove` (`add-comment` / `remove-comment`).
+- `#send_notification` on `Host`/`Service` (`send-custom-notification`).
 - `Host#schedule_downtime` and `Host#downtimes` (host-level downtimes), mirroring
   the service-level API.
 - `Service#schedule_downtime` / `Host#schedule_downtime` now return the created

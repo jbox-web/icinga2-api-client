@@ -65,6 +65,49 @@ RSpec.describe Icinga2::API::Service do
     end
   end
 
+  describe '#add_comment' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'raises ArgumentError when required parameters are missing' do
+      expect { built_service.add_comment(author: 'admin') }.to raise_error(ArgumentError, /comment/)
+    end
+
+    it 'returns the created Comment' do
+      stub_action('add-comment', '{"results":[{"code":200,"name":"foo.example.net!ssh!cuuid","status":"ok"}]}')
+      comment = built_service.add_comment(author: 'a', comment: 'c')
+
+      expect(comment).to be_a(Icinga2::API::Comment)
+      expect(comment.full_name).to eq 'foo.example.net!ssh!cuuid'
+    end
+  end
+
+  describe '#send_notification' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'sends a custom notification and returns the result' do
+      stub_action('send-custom-notification')
+      expect(built_service.send_notification(author: 'a', comment: 'c')).to be_a(Hash)
+    end
+  end
+
+  describe '#comments' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'lists the service comments' do
+      body = '{"results":[{"attrs":{"__name":"foo.example.net!ssh!cuuid"}}]}'
+      stub_request(:post, %r{/v1/objects/comments})
+        .to_return(status: 200, body: body, headers: { 'Content-Type' => 'application/json' })
+
+      expect(built_service.comments.map(&:full_name)).to eq ['foo.example.net!ssh!cuuid']
+    end
+  end
+
   describe '#api_client' do
     it 'returns the previous defined client' do
       VCR.use_cassette('single_host_with_services') do

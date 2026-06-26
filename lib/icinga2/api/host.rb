@@ -20,6 +20,12 @@ module Icinga2
         end
       end
 
+      def comments
+        fetch_comments.collect do |comment_attributes|
+          Comment.new comment_attributes['attrs'].merge(api_client: api_client, host: self)
+        end
+      end
+
       private
 
       def action_type
@@ -34,10 +40,23 @@ module Icinga2
         Downtime.new('__name' => name, api_client: api_client, host: self)
       end
 
+      def build_comment(name)
+        Comment.new('__name' => name, api_client: api_client, host: self)
+      end
+
       def fetch_downtimes
-        opts    = { filter: "downtime.host_name==\"#{name}\" && downtime.service_name==\"\"" }
+        fetch_objects('/objects/downtimes', 'downtime')
+      end
+
+      def fetch_comments
+        fetch_objects('/objects/comments', 'comment')
+      end
+
+      # Host-level objects only: filter out those attached to a service.
+      def fetch_objects(path, kind)
+        filter  = "#{kind}.host_name==\"#{name}\" && #{kind}.service_name==\"\""
         headers = { 'X-HTTP-Method-Override' => 'GET' }
-        api_client.api.post('/objects/downtimes', params: opts, headers: headers)
+        api_client.api.post(path, params: { filter: filter }, headers: headers)
       end
 
     end

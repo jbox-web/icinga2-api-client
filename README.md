@@ -233,6 +233,19 @@ client.hosts.find('web01').acknowledge(author: 'admin', comment: 'On it')
 client.hosts.find('web01').services.find('ssh').remove_acknowledgement
 ```
 
+#### Comments
+
+```ruby
+service = client.hosts.find('web01').services.find('ssh')
+
+comment = service.add_comment(author: 'admin', comment: 'Investigating')
+service.comments            # => [Icinga2::API::Comment, ...]
+comment.remove
+
+# Host-level comments work the same way
+client.hosts.find('web01').comments
+```
+
 #### Cancel a downtime
 
 ```ruby
