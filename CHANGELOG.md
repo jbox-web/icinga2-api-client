@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `Host#schedule_downtime` and `Host#downtimes` (host-level downtimes), mirroring
+  the service-level API.
+- `Service#schedule_downtime` / `Host#schedule_downtime` now return the created
+  `Downtime` object instead of the raw API payload.
 - `Icinga2::API::Error` hierarchy (`NotFound`, `ClientError`, `ServerError`,
   `Timeout`, `ConnectionFailed`); Faraday transport errors are translated into
   it so callers no longer depend on Faraday's exceptions.

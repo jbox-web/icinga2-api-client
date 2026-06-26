@@ -4,8 +4,7 @@ module Icinga2
   module API
     class Service < Icinga2::API::Resource
 
-      # Parameters Icinga2 requires to schedule a downtime.
-      REQUIRED_DOWNTIME_PARAMS = %i[author comment start_time end_time duration].freeze
+      include Icinga2::API::DowntimeScheduling
 
       attr_reader :host
 
@@ -21,11 +20,11 @@ module Icinga2
       alias to_s full_name
 
       def schedule_downtime(opts = {})
-        missing = REQUIRED_DOWNTIME_PARAMS - opts.keys
-        raise ArgumentError, "missing downtime parameters: #{missing.join(', ')}" unless missing.empty?
+        validate_downtime_params!(opts)
 
-        opts = opts.merge(filter: "service.name==\"#{name}\" && service.host_name==\"#{host.name}\"")
-        api_client.api.post('/actions/schedule-downtime', query: { type: 'Service' }, params: opts)
+        opts    = opts.merge(filter: "service.name==\"#{name}\" && service.host_name==\"#{host.name}\"")
+        results = api_client.api.post('/actions/schedule-downtime', query: { type: 'Service' }, params: opts)
+        build_scheduled_downtime(results, host: host, service: self)
       end
 
       def downtimes

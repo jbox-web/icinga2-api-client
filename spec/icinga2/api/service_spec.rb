@@ -18,6 +18,24 @@ RSpec.describe Icinga2::API::Service do
       expect { built_service.schedule_downtime(author: 'admin') }
         .to raise_error(ArgumentError, /comment/)
     end
+
+    context 'when the downtime is scheduled' do
+      include WebMock::API
+
+      after { WebMock.reset! }
+
+      it 'returns the created Downtime' do
+        stub_request(:post, %r{/v1/actions/schedule-downtime}).to_return(
+          status:  200,
+          body:    '{"results":[{"code":200,"name":"foo.example.net!ssh!uuid","status":"ok"}]}',
+          headers: { 'Content-Type' => 'application/json' }
+        )
+
+        downtime = built_service.schedule_downtime(author: 'a', comment: 'c', start_time: 1, end_time: 2, duration: 3)
+        expect(downtime).to be_a(Icinga2::API::Downtime)
+        expect(downtime.full_name).to eq 'foo.example.net!ssh!uuid'
+      end
+    end
   end
 
   describe '#api_client' do

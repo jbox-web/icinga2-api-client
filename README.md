@@ -183,17 +183,26 @@ end_time   = start_time + duration
 
 # Icinga expects Unix timestamps, so call #to_i on the times.
 # The `duration` param is mandatory even when `fixed` is true (the default).
-client.hosts
-      .find('web01')
-      .services
-      .find('ssh')
-      .schedule_downtime(
-        author:     'admin',
-        comment:    'Maintenance window',
-        start_time: start_time.to_i,
-        end_time:   end_time.to_i,
-        duration:   duration.to_i
-      )
+# Returns the created Icinga2::API::Downtime (raises ArgumentError if a
+# required parameter is missing).
+downtime =
+  client.hosts
+        .find('web01')
+        .services
+        .find('ssh')
+        .schedule_downtime(
+          author:     'admin',
+          comment:    'Maintenance window',
+          start_time: start_time.to_i,
+          end_time:   end_time.to_i,
+          duration:   duration.to_i
+        )
+
+# A whole host can be put in downtime too (same parameters):
+client.hosts.find('web01').schedule_downtime(
+  author: 'admin', comment: 'Reboot', start_time: start_time.to_i,
+  end_time: end_time.to_i, duration: duration.to_i
+)
 ```
 
 #### List downtimes
@@ -204,6 +213,9 @@ client.hosts.find('web01').services.downtimes
 
 # Downtimes of a single service
 client.hosts.find('web01').services.find('ssh').downtimes
+
+# Host-level downtimes
+client.hosts.find('web01').downtimes
 ```
 
 #### Cancel a downtime

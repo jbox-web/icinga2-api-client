@@ -48,6 +48,10 @@ RSpec.describe 'Icinga2 live API', :integration do # rubocop:disable RSpec/Descr
     it 'returns nil for a missing host' do
       expect(client.hosts.find('zzz-does-not-exist-42.invalid')).to be_nil
     end
+
+    it 'lists host-level downtimes' do
+      expect(client.hosts.find('foo.example.net').downtimes).to be_a(Array)
+    end
   end
 
   describe 'services' do

@@ -8,6 +8,46 @@ RSpec.describe Icinga2::API::Host do
 
   let(:client) { Icinga2::API::Client.new('https://icinga2.example.net:5665', icinga_credentials) }
 
+  describe '#schedule_downtime' do
+    include WebMock::API
+
+    subject(:built_host) { described_class.new(name: 'foo.example.net', api_client: client) }
+
+    after { WebMock.reset! }
+
+    it 'raises ArgumentError when required parameters are missing' do
+      expect { built_host.schedule_downtime(author: 'admin') }.to raise_error(ArgumentError, /comment/)
+    end
+
+    it 'returns the created Downtime' do
+      stub_request(:post, %r{/v1/actions/schedule-downtime}).to_return(
+        status:  200,
+        body:    '{"results":[{"code":200,"name":"foo.example.net!uuid","status":"ok"}]}',
+        headers: { 'Content-Type' => 'application/json' }
+      )
+
+      downtime = built_host.schedule_downtime(author: 'a', comment: 'c', start_time: 1, end_time: 2, duration: 3)
+      expect(downtime).to be_a(Icinga2::API::Downtime)
+      expect(downtime.full_name).to eq 'foo.example.net!uuid'
+    end
+  end
+
+  describe '#downtimes' do
+    include WebMock::API
+
+    subject(:built_host) { described_class.new(name: 'foo.example.net', api_client: client) }
+
+    after { WebMock.reset! }
+
+    it 'lists the host-level downtimes' do
+      body = '{"results":[{"attrs":{"__name":"foo.example.net!uuid","host_name":"foo.example.net"}}]}'
+      stub_request(:post, %r{/v1/objects/downtimes})
+        .to_return(status: 200, body: body, headers: { 'Content-Type' => 'application/json' })
+
+      expect(built_host.downtimes.map(&:full_name)).to eq ['foo.example.net!uuid']
+    end
+  end
+
   describe '#api_client' do
     it 'returns the previous defined client' do
       VCR.use_cassette('single_host') do

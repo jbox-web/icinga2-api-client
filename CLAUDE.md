@@ -40,7 +40,8 @@ The fluent chain threads context downward: each builder merges `api_client:` (an
 ### Conventions that matter
 
 - **Icinga filters use double quotes only.** Filter strings are built inline (e.g. `match(\"#{host.name}\", service.host_name)`). Match the existing escaping style.
-- **GET-with-body via header override.** Listing downtimes sends a `POST` with `X-HTTP-Method-Override: GET` because the filters are too large for a query string — see `Services#fetch_downtimes` / `Service#fetch_downtimes`.
+- **GET-with-body via header override.** Listing downtimes sends a `POST` with `X-HTTP-Method-Override: GET` because the filters are too large for a query string — see `Services#fetch_downtimes` / `Service#fetch_downtimes` / `Host#fetch_downtimes`.
+- **Downtime scheduling is shared** via the `DowntimeScheduling` module (`lib/icinga2/api/downtime_scheduling.rb`), included by both `Host` and `Service`: it validates required params (`REQUIRED_PARAMS`) and builds the returned `Downtime` from the schedule-downtime response. `schedule_downtime` returns a `Downtime`, not the raw payload.
 - **`Resource#to_yaml_properties` is overridden** to dump only `@attributes`, avoiding huge YAML output from nested `@host`/`@service`/`@api_client` references. Keep this in mind when adding instance vars to resources.
 - **Downtime timestamps** are converted from epoch ints to `Time` in `Downtime#initialize`. The API expects integer timestamps on input (callers pass `.to_i`).
 - **Errors are the gem's own** (`lib/icinga2/api/error.rb`): never let raw Faraday exceptions escape. `Interface` maps them to `Icinga2::API::Error` subclasses. Order in `FARADAY_ERRORS` matters — most specific first, because `Faraday::TimeoutError < Faraday::ServerError` and `Faraday::ResourceNotFound < Faraday::ClientError`.
