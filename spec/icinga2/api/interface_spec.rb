@@ -71,6 +71,19 @@ RSpec.describe Icinga2::API::Interface do
     end
   end
 
+  describe '#stream' do
+    it 'yields each newline-delimited JSON event' do
+      body = "{\"type\":\"a\"}\n{\"type\":\"b\"}\n"
+      stub_request(:post, 'https://icinga2.example.net:5665/v1/events')
+        .to_return(status: 200, body: body, headers: { 'Content-Type' => 'application/json' })
+
+      events = []
+      interface.stream('/events', params: { types: ['CheckResult'], queue: 'q' }) { |event| events << event }
+
+      expect(events).to eq [{ 'type' => 'a' }, { 'type' => 'b' }]
+    end
+  end
+
   describe '#post' do
     it 'sends params as a JSON body and merges the given headers' do
       stub_request(:post, 'https://icinga2.example.net:5665/v1/objects/downtimes')

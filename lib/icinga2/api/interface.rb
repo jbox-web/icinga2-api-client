@@ -62,7 +62,29 @@ module Icinga2
         with_error_handling { results(client.post(url, params.to_json, headers)) }
       end
 
+      # Subscribe to the Icinga2 event stream (/v1/events). Blocks, yielding each
+      # newline-delimited JSON event as a Hash until the connection is closed.
+      def stream(path, params: {}, &block)
+        buffer = +''
+
+        with_error_handling do
+          streaming_client.post(build_url(path), params.to_json, accept: 'application/json') do |req|
+            req.options.on_data = proc { |chunk, _received| emit_events(buffer << chunk, &block) }
+          end
+        end
+
+        nil
+      end
+
       private
+
+      # Yield and remove every complete newline-delimited JSON event in +buffer+.
+      def emit_events(buffer)
+        while (newline = buffer.index("\n"))
+          line = buffer.slice!(0, newline + 1).chomp
+          yield JSON.parse(line) unless line.empty?
+        end
+      end
 
       # Unwrap the Icinga2 envelope, tolerating empty or malformed bodies
       # (e.g. a 200 response whose body has no "results" key).
@@ -98,6 +120,15 @@ module Icinga2
           builder.response :raise_error
           builder.response :json
           builder.response :logger, logger, logger_options if enable_logs
+        end
+      end
+
+      # A connection without the JSON response middleware or read timeout:
+      # the event stream is parsed line by line and stays open indefinitely.
+      def streaming_client
+        @streaming_client ||= Faraday.new(base_url, ssl: ssl_options) do |builder|
+          builder.request :authorization, :basic, username, password
+          builder.response :raise_error
         end
       end
 

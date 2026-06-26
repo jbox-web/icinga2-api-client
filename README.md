@@ -258,6 +258,17 @@ client.hosts
       .cancel
 ```
 
+### Event stream
+
+`Client#subscribe` opens the Icinga2 event stream and **blocks**, yielding each
+event as a Hash until the connection is closed (break out of the block to stop):
+
+```ruby
+client.subscribe(types: ['CheckResult', 'StateChange'], queue: 'my-queue') do |event|
+  puts event['type']
+end
+```
+
 ## Error handling
 
 Transport errors are wrapped in this gem's own hierarchy so you never have to

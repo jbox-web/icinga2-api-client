@@ -22,6 +22,13 @@ module Icinga2
       def status
         api.get('/status')
       end
+
+      # Subscribe to the Icinga2 event stream. Blocks, yielding each event Hash.
+      def subscribe(types:, queue:, filter: nil, &block)
+        params = { types: Array(types), queue: queue }
+        params[:filter] = filter if filter
+        api.stream('/events', params: params, &block)
+      end
     end
   end
 end

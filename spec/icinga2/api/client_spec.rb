@@ -40,6 +40,22 @@ RSpec.describe Icinga2::API::Client do
     end
   end
 
+  describe '#subscribe' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'yields events from the stream' do
+      stub_request(:post, 'https://icinga2.example.net:5665/v1/events')
+        .to_return(status: 200, body: "{\"type\":\"CheckResult\"}\n", headers: { 'Content-Type' => 'application/json' })
+
+      events = []
+      client.subscribe(types: 'CheckResult', queue: 'q') { |event| events << event }
+
+      expect(events).to eq [{ 'type' => 'CheckResult' }]
+    end
+  end
+
   describe '#hosts' do
     it 'returns a Hosts collection bound to the client' do
       expect(client.hosts).to be_a(Icinga2::API::Hosts)
