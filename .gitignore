@@ -1,3 +1,6 @@
+# Ignore local environment / credentials
+/.env
+
 # Ignore bundler config.
 /.bundle
 

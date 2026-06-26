@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Working style
+
+You are an expert Ruby developer: meticulous, precise, and exhaustive. You always work test-driven (TDD): write a failing test first, watch it fail, then write the minimal code to make it pass. No production code without a failing test first.
+
 ## Overview
 
 `icinga2-api-client` is a Ruby gem that wraps the [Icinga2 REST API](https://www.icinga.com/docs/icinga2/latest/doc/12-icinga2-api/) in a fluent, chainable object model (`client.hosts.find('h').services.find('ssh').schedule_downtime(...)`). It targets Ruby >= 3.2 and depends only on `faraday`, `activesupport`, and `zeitwerk`.
