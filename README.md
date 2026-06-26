@@ -258,6 +258,16 @@ bin/rubocop        # lint
 bin/guard          # watch files and re-run specs on change
 ```
 
+Read-only integration specs can be run against a real Icinga2 server (they are
+excluded from the default run):
+
+```sh
+ICINGA_INTEGRATION=1 \
+ICINGA_API_URL=https://icinga.example.net:5665 \
+ICINGA_API_USER=root ICINGA_API_PASSWORD=secret \
+bin/rspec spec/integration
+```
+
 ## Contribute
 
 You can contribute to this gem in many ways, such as:

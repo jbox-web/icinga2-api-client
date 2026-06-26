@@ -35,6 +35,10 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 
   config.raise_errors_for_deprecations!
+
+  # Integration specs hit a real Icinga2 server and are excluded by default.
+  # Run them with: ICINGA_INTEGRATION=1 ICINGA_API_URL=... ICINGA_API_USER=... ICINGA_API_PASSWORD=... bin/rspec
+  config.filter_run_excluding(:integration) unless ENV['ICINGA_INTEGRATION']
 end
 
 def icinga_credentials

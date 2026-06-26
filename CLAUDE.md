@@ -51,3 +51,5 @@ The fluent chain threads context downward: each builder merges `api_client:` (an
 ## Testing
 
 Specs (`spec/icinga2/api/`) use **VCR cassettes** (`spec/cassettes/*.yml`) hooked into WebMock — no live Icinga server is contacted. VCR runs with `default_cassette_options = { record: :none }`, so an unmatched request **fails** rather than hitting a live server: when adding behavior that hits a new endpoint, record/author a matching cassette. Because VCR matches on method + URI, the cassettes also guard request URLs/filters against regressions. Error paths and URL building are unit-tested directly with WebMock stubs in `interface_spec.rb`. Helpers `icinga_credentials` and `create_downtime` live in `spec/spec_helper.rb`.
+
+`spec/integration/` holds **read-only live specs** that hit a real Icinga2 server (demo hosts `foo.example.net` / `bar.example.net`). They are tagged `:integration` and excluded by default (`filter_run_excluding`); run with `ICINGA_INTEGRATION=1 ICINGA_API_URL=… ICINGA_API_USER=… ICINGA_API_PASSWORD=… bin/rspec spec/integration`. They turn VCR off and allow net connect for their examples only.
