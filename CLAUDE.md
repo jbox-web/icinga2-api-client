@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 You are an expert Ruby developer: meticulous, precise, and exhaustive. You always work test-driven (TDD): write a failing test first, watch it fail, then write the minimal code to make it pass. No production code without a failing test first.
 
+## Never read or display secrets
+
+Do **not** read or display secrets (passwords, tokens, API keys). They live in several places — third-party tool `.env` files, inline credentials in `vars.http_uri` / `vars.config` (e.g. files under `conf.d/`), `TicketSalt`, etc. Never `cat` them, and never copy their values into a reply, a log, or a commit. **Never persist a secret anywhere** — not in memory, not in a temporary file, not in a script, not in a commit. When a command needs a secret, load it through the environment (`set -a; . ./.env; set +a`) without printing its value, and delete any temporary file after use.
+
 ## Overview
 
 `icinga2-api-client` is a Ruby gem that wraps the [Icinga2 REST API](https://www.icinga.com/docs/icinga2/latest/doc/12-icinga2-api/) in a fluent, chainable object model (`client.hosts.find('h').services.find('ssh').schedule_downtime(...)`). It targets Ruby >= 3.2 and depends only on `faraday`, `activesupport`, and `zeitwerk`.
