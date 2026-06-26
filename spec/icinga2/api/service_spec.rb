@@ -10,7 +10,7 @@ RSpec.describe Icinga2::API::Service do
 
   describe '#api_client' do
     it 'returns the previous defined client' do
-      VCR.use_cassette('single_host_with_services', record: :new_episodes) do
+      VCR.use_cassette('single_host_with_services') do
         expect(service.api_client).to eq client
       end
     end
@@ -18,7 +18,7 @@ RSpec.describe Icinga2::API::Service do
 
   describe '#to_s' do
     it 'returns Icinga2 service name' do
-      VCR.use_cassette('single_host_with_services', record: :new_episodes) do
+      VCR.use_cassette('single_host_with_services') do
         expect(service.to_s).to eq 'foo.example.net!dockerd|daemon'
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe Icinga2::API::Service do
 
   describe '#to_h' do
     it 'returns service attributes as a hash' do
-      VCR.use_cassette('single_host_with_services', record: :new_episodes) do
+      VCR.use_cassette('single_host_with_services') do
         expect(service.to_h).to be_a(Hash)
         expect(service.to_h[:name]).to eq 'dockerd|daemon'
       end
@@ -35,7 +35,7 @@ RSpec.describe Icinga2::API::Service do
 
   describe '#full_name' do
     it 'returns Icinga2 service full_name' do
-      VCR.use_cassette('single_host_with_services', record: :new_episodes) do
+      VCR.use_cassette('single_host_with_services') do
         expect(service.full_name).to eq 'foo.example.net!dockerd|daemon'
       end
     end
@@ -54,7 +54,7 @@ RSpec.describe Icinga2::API::Service do
 
     context 'when Icinga2 downtimes exist' do
       it 'returns all Icinga2 downtimes for the service' do
-        VCR.use_cassette('service_with_downtimes', record: :new_episodes) do
+        VCR.use_cassette('service_with_downtimes') do
           create_downtime('foo.example.net', 'dockerd|daemon')
           downtimes = service.downtimes
 

@@ -39,6 +39,45 @@ RSpec.describe Icinga2::API::Interface do
     end
   end
 
+  describe 'request URL building' do
+    # The stub only matches when the path/version/query are built exactly right,
+    # so a successful call proves the URL was assembled as expected.
+    it 'prefixes the path with the API version' do
+      stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/services')
+        .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
+      expect(interface.get('/objects/services')).to eq []
+    end
+
+    it 'appends the query hash as an encoded query string' do
+      stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/services')
+        .with(query: { 'filter' => 'service.host_name=="web01"' })
+        .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
+      expect(interface.get('/objects/services', query: { filter: 'service.host_name=="web01"' })).to eq []
+    end
+  end
+
+  describe 'result extraction' do
+    def stub_get(body)
+      stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/hosts')
+        .to_return(status: 200, body: body, headers: { 'Content-Type' => 'application/json' })
+    end
+
+    it 'returns the results array' do
+      stub_get('{"results":[{"attrs":{}}]}')
+      expect(interface.get('/objects/hosts')).to eq [{ 'attrs' => {} }]
+    end
+
+    it 'returns an empty array when the body has no results key' do
+      stub_get('{"error":404,"status":"No objects found."}')
+      expect(interface.get('/objects/hosts')).to eq []
+    end
+
+    it 'returns an empty array when the body is empty' do
+      stub_get('')
+      expect(interface.get('/objects/hosts')).to eq []
+    end
+  end
+
   describe 'transport failures' do
     it 'raises Icinga2::API::Error::Timeout on a Faraday timeout' do
       stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/hosts').to_raise(Faraday::TimeoutError)

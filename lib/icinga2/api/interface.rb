@@ -46,7 +46,7 @@ module Icinga2
         url = build_url(path, query)
 
         # Send request
-        with_error_handling { client.get(url).body['results'] }
+        with_error_handling { results(client.get(url)) }
       end
 
       def post(path, query: {}, params: {}, headers: {})
@@ -54,10 +54,17 @@ module Icinga2
         url     = build_url(path, query)
         headers = headers.merge(accept: 'application/json')
 
-        with_error_handling { client.post(url, params.to_json, headers).body['results'] }
+        with_error_handling { results(client.post(url, params.to_json, headers)) }
       end
 
       private
+
+      # Unwrap the Icinga2 envelope, tolerating empty or malformed bodies
+      # (e.g. a 200 response whose body has no "results" key).
+      def results(response)
+        body = response.body
+        body.is_a?(Hash) ? Array(body['results']) : []
+      end
 
       # Translate Faraday transport errors into the gem's own error hierarchy
       # so callers never have to rescue Faraday-specific exceptions.

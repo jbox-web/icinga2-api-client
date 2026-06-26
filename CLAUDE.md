@@ -45,8 +45,9 @@ The fluent chain threads context downward: each builder merges `api_client:` (an
 - **Downtime timestamps** are converted from epoch ints to `Time` in `Downtime#initialize`. The API expects integer timestamps on input (callers pass `.to_i`).
 - **Errors are the gem's own** (`lib/icinga2/api/error.rb`): never let raw Faraday exceptions escape. `Interface` maps them to `Icinga2::API::Error` subclasses. Order in `FARADAY_ERRORS` matters — most specific first, because `Faraday::TimeoutError < Faraday::ServerError` and `Faraday::ResourceNotFound < Faraday::ClientError`.
 - **`Resource#filter_hash` must not mutate `@attributes`** — it `dup`s before rejecting, so `to_h(only:/except:)` stays non-destructive.
+- **`Interface#results` tolerates malformed bodies** — it returns `[]` for empty / non-`Hash` / missing-`results` responses so callers never `nil.map`. `#get`/`#post` go through it.
 - **Version** lives in `lib/icinga2/api/version.rb` as `VERSION::{MAJOR,MINOR,TINY,PRE}`; the gemspec reads `VERSION::STRING`.
 
 ## Testing
 
-Specs (`spec/icinga2/api/`) use **VCR cassettes** (`spec/cassettes/*.yml`) hooked into WebMock — no live Icinga server is contacted. Each example wraps API calls in `VCR.use_cassette('<name>')`. Helpers `icinga_credentials` and `create_downtime` live in `spec/spec_helper.rb`. When adding behavior that hits a new endpoint, record/author a matching cassette.
+Specs (`spec/icinga2/api/`) use **VCR cassettes** (`spec/cassettes/*.yml`) hooked into WebMock — no live Icinga server is contacted. VCR runs with `default_cassette_options = { record: :none }`, so an unmatched request **fails** rather than hitting a live server: when adding behavior that hits a new endpoint, record/author a matching cassette. Because VCR matches on method + URI, the cassettes also guard request URLs/filters against regressions. Error paths and URL building are unit-tested directly with WebMock stubs in `interface_spec.rb`. Helpers `icinga_credentials` and `create_downtime` live in `spec/spec_helper.rb`.

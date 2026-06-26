@@ -10,7 +10,7 @@ RSpec.describe Icinga2::API::Services do
 
   describe '#all' do
     it 'returns all Icinga2 services for the host' do
-      VCR.use_cassette('single_host_with_services', record: :new_episodes) do
+      VCR.use_cassette('single_host_with_services') do
         services = all_services.all
         expect(services.size).to eq 2
         expect(services.first.to_s).to eq 'foo.example.net!dockerd|daemon'
@@ -21,7 +21,7 @@ RSpec.describe Icinga2::API::Services do
   describe '#find' do
     context 'when Icinga2 service host exist' do
       it 'returns service object' do
-        VCR.use_cassette('single_host_with_services', record: :new_episodes) do
+        VCR.use_cassette('single_host_with_services') do
           service = all_services.find('dockerd|daemon')
           expect(service).to be_a(Icinga2::API::Service)
           expect(service.to_s).to eq 'foo.example.net!dockerd|daemon'
@@ -31,7 +31,7 @@ RSpec.describe Icinga2::API::Services do
 
     context 'when Icinga2 service host dont exist' do
       it 'returns nil' do
-        VCR.use_cassette('single_host_with_services', record: :new_episodes) do
+        VCR.use_cassette('single_host_with_services') do
           expect(all_services.find('foo')).to be_nil
         end
       end
@@ -52,7 +52,7 @@ RSpec.describe Icinga2::API::Services do
 
     context 'when Icinga2 downtimes exist' do
       it 'returns all Icinga2 services downtimes for the host' do
-        VCR.use_cassette('single_host_with_downtimes', record: :new_episodes) do
+        VCR.use_cassette('single_host_with_downtimes') do
           create_downtime('foo.example.net', 'dockerd|daemon')
           downtimes = all_services.downtimes
 
@@ -62,7 +62,7 @@ RSpec.describe Icinga2::API::Services do
       end
 
       it 'associates each downtime with its service' do
-        VCR.use_cassette('single_host_with_downtimes', record: :new_episodes) do
+        VCR.use_cassette('single_host_with_downtimes') do
           create_downtime('foo.example.net', 'dockerd|daemon')
           downtime = all_services.downtimes.first
 

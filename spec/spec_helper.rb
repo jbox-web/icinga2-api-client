@@ -13,7 +13,9 @@ end
 # Configure VCR
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
-  c.hook_into            :webmock
+  c.hook_into :webmock
+  # Never hit a live server from the test suite: replay cassettes only.
+  c.default_cassette_options = { record: :none }
 end
 
 # Configure RSpec
