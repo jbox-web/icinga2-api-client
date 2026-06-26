@@ -94,6 +94,21 @@ RSpec.describe Icinga2::API::Service do
     end
   end
 
+  describe '#process_check_result' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'raises ArgumentError when required parameters are missing' do
+      expect { built_service.process_check_result(exit_status: 2) }.to raise_error(ArgumentError, /plugin_output/)
+    end
+
+    it 'submits the check result and returns the result' do
+      stub_action('process-check-result')
+      expect(built_service.process_check_result(exit_status: 2, plugin_output: 'CRITICAL')).to be_a(Hash)
+    end
+  end
+
   describe '#comments' do
     include WebMock::API
 

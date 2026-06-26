@@ -58,6 +58,12 @@ RSpec.describe 'Icinga2 live API', :integration do # rubocop:disable RSpec/Descr
     end
   end
 
+  describe 'status' do
+    it 'returns the daemon status components' do
+      expect(client.status).to be_a(Array).and(be_any)
+    end
+  end
+
   describe 'services' do
     subject(:services) { client.hosts.find('foo.example.net').services }
 

@@ -11,8 +11,9 @@ module Icinga2
     #   - #build_comment(name) => a Comment for the given name
     module Actions
 
-      REQUIRED_DOWNTIME_PARAMS = %i[author comment start_time end_time duration].freeze
-      AUTHOR_COMMENT_PARAMS    = %i[author comment].freeze
+      REQUIRED_DOWNTIME_PARAMS     = %i[author comment start_time end_time duration].freeze
+      AUTHOR_COMMENT_PARAMS        = %i[author comment].freeze
+      REQUIRED_CHECK_RESULT_PARAMS = %i[exit_status plugin_output].freeze
 
       def schedule_downtime(opts = {})
         require_action_params!(opts, REQUIRED_DOWNTIME_PARAMS)
@@ -37,6 +38,11 @@ module Icinga2
       def send_notification(opts = {})
         require_action_params!(opts, AUTHOR_COMMENT_PARAMS)
         run_action('send-custom-notification', opts).first
+      end
+
+      def process_check_result(opts = {})
+        require_action_params!(opts, REQUIRED_CHECK_RESULT_PARAMS)
+        run_action('process-check-result', opts).first
       end
 
       private

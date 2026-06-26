@@ -26,6 +26,20 @@ RSpec.describe Icinga2::API::Client do
     end
   end
 
+  describe '#status' do
+    include WebMock::API
+
+    after { WebMock.reset! }
+
+    it 'returns the status results' do
+      stub_request(:get, %r{/v1/status}).to_return(
+        status: 200, body: '{"results":[{"name":"IcingaApplication"}]}', headers: { 'Content-Type' => 'application/json' }
+      )
+
+      expect(client.status).to eq [{ 'name' => 'IcingaApplication' }]
+    end
+  end
+
   describe '#hosts' do
     it 'returns a Hosts collection bound to the client' do
       expect(client.hosts).to be_a(Icinga2::API::Hosts)

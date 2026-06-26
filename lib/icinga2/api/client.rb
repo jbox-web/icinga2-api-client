@@ -18,6 +18,10 @@ module Icinga2
       def hosts
         @hosts ||= Icinga2::API::Hosts.new(api_client: self)
       end
+
+      def status
+        api.get('/status')
+      end
     end
   end
 end
