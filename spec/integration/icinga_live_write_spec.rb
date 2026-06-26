@@ -35,6 +35,10 @@ RSpec.describe 'Icinga2 live writes', :integration, :integration_write do # rubo
     end
   end
 
+  before do
+    skip 'demo host bar.example.net is not present on the server' unless client.hosts.find('bar.example.net')
+  end
+
   let(:service) { client.hosts.find('bar.example.net').services.find('dockerd|daemon') }
 
   def schedule_short_downtime
