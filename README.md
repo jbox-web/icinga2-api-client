@@ -91,7 +91,7 @@ Options passed to `Icinga2::API::Client.new` (second argument):
 | `version`      | `'v1'`  | API version segment used in request paths                    |
 | `ssl_options`  | `{}`    | Hash forwarded to Faraday's `:ssl` option                    |
 | `open_timeout` | `nil`   | Connection open timeout in seconds (no timeout by default)   |
-| `timeout`      | `nil`   | Request read timeout in seconds (no timeout by default)      |
+| `timeout`      | `30`    | Request read timeout in seconds                              |
 | `logging`      | `{}`    | Request logging, see below                                   |
 
 ### SSL / TLS
@@ -115,8 +115,8 @@ ssl_options: { ca_file: '/etc/icinga2/ca.crt' }
 
 ### Timeouts
 
-By default no timeout is applied. Set `open_timeout` / `timeout` (in seconds) to
-avoid hanging forever on an unresponsive Icinga2 instance:
+The read `timeout` defaults to 30 seconds; `open_timeout` is unset. Override
+both (in seconds) to suit your environment:
 
 ```ruby
 client = Icinga2::API::Client.new('https://icinga.example.net:5665',

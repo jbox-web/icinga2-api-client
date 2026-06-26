@@ -144,5 +144,9 @@ RSpec.describe Icinga2::API::Interface do
       expect(connection.options.open_timeout).to eq 3
       expect(connection.options.timeout).to eq 7
     end
+
+    it 'defaults the read timeout to 30 seconds' do
+      expect(interface.send(:client).options.timeout).to eq 30
+    end
   end
 end

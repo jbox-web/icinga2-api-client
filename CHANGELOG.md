@@ -16,7 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   it so callers no longer depend on Faraday's exceptions.
 - `Error#response` exposes the underlying Faraday response (status/body) when
   available.
-- Configurable `open_timeout` / `timeout` connection options.
+- Configurable `open_timeout` / `timeout` connection options (`timeout`
+  defaults to 30 seconds).
 - `Service#schedule_downtime` validates required parameters and raises
   `ArgumentError` when any is missing.
 - Client/connection options are validated: an unknown option (e.g. a typo

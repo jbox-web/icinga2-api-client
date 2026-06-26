@@ -30,7 +30,7 @@ module Icinga2
         @version      = args.fetch(:version, 'v1')
         @ssl_options  = args.fetch(:ssl_options, {})
         @open_timeout = args.fetch(:open_timeout, nil)
-        @timeout      = args.fetch(:timeout, nil)
+        @timeout      = args.fetch(:timeout, 30)
         @logging      = args.fetch(:logging, {})
       end
 
