@@ -27,7 +27,7 @@ Files are autoloaded by **Zeitwerk** (`lib/icinga2.rb`), with custom inflections
 
 Two layers:
 
-1. **Transport** — `Interface` (`lib/icinga2/api/interface.rb`) owns the Faraday connection (basic auth, JSON request/response, `raise_error`, optional logging). `#get` and `#post` return the unwrapped `body['results']` array. `Client` is the user-facing entry point; it lazily builds one `Interface` and exposes `#hosts`.
+1. **Transport** — `Interface` (`lib/icinga2/api/interface.rb`) owns the Faraday connection (basic auth, JSON request/response, `raise_error`, optional logging, optional `open_timeout`/`timeout`). `#get` and `#post` return the unwrapped `body['results']` array and translate Faraday errors into the gem's own hierarchy via `with_error_handling` (`FARADAY_ERRORS` map). `Client` is the user-facing entry point; it lazily builds one `Interface` and exposes `#hosts`.
 
 2. **Resource model** — Collection classes (`Hosts`, `Services`) fetch from the API and map raw `attrs` hashes into resource objects. Resource classes (`Host`, `Service`, `Downtime`) inherit `Resource`, which uses `method_missing`/`respond_to_missing?` to expose every API attribute as a reader/writer backed by an `@attributes` hash.
 
@@ -39,6 +39,8 @@ The fluent chain threads context downward: each builder merges `api_client:` (an
 - **GET-with-body via header override.** Listing downtimes sends a `POST` with `X-HTTP-Method-Override: GET` because the filters are too large for a query string — see `Services#fetch_downtimes` / `Service#fetch_downtimes`.
 - **`Resource#to_yaml_properties` is overridden** to dump only `@attributes`, avoiding huge YAML output from nested `@host`/`@service`/`@api_client` references. Keep this in mind when adding instance vars to resources.
 - **Downtime timestamps** are converted from epoch ints to `Time` in `Downtime#initialize`. The API expects integer timestamps on input (callers pass `.to_i`).
+- **Errors are the gem's own** (`lib/icinga2/api/error.rb`): never let raw Faraday exceptions escape. `Interface` maps them to `Icinga2::API::Error` subclasses. Order in `FARADAY_ERRORS` matters — most specific first, because `Faraday::TimeoutError < Faraday::ServerError` and `Faraday::ResourceNotFound < Faraday::ClientError`.
+- **`Resource#filter_hash` must not mutate `@attributes`** — it `dup`s before rejecting, so `to_h(only:/except:)` stays non-destructive.
 - **Version** lives in `lib/icinga2/api/version.rb` as `VERSION::{MAJOR,MINOR,TINY,PRE}`; the gemspec reads `VERSION::STRING`.
 
 ## Testing

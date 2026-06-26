@@ -25,6 +25,8 @@ Largely copied (and adapted) from [gdi/ruby-nagios-api-client](https://github.co
   - [Hosts](#hosts)
   - [Services](#services)
   - [Downtimes](#downtimes)
+- [Error handling](#error-handling)
+- [Thread safety](#thread-safety)
 - [Development](#development)
 - [Contribute](#contribute)
 - [License](#license)
@@ -82,13 +84,15 @@ host.to_h(except: [:vars])
 
 Options passed to `Icinga2::API::Client.new` (second argument):
 
-| Option        | Default | Description                                                              |
-| ------------- | ------- | ------------------------------------------------------------------------ |
-| `username`    | —       | API user (required, HTTP basic auth)                                     |
-| `password`    | —       | API user password (required)                                            |
-| `version`     | `'v1'`  | API version segment used in request paths                                |
-| `ssl_options` | `{}`    | Hash forwarded to Faraday's `:ssl` option                                |
-| `logging`     | `{}`    | Request logging, see below                                               |
+| Option         | Default | Description                                                  |
+| -------------- | ------- | ------------------------------------------------------------ |
+| `username`     | —       | API user (required, HTTP basic auth)                         |
+| `password`     | —       | API user password (required)                                 |
+| `version`      | `'v1'`  | API version segment used in request paths                    |
+| `ssl_options`  | `{}`    | Hash forwarded to Faraday's `:ssl` option                    |
+| `open_timeout` | `nil`   | Connection open timeout in seconds (no timeout by default)   |
+| `timeout`      | `nil`   | Request read timeout in seconds (no timeout by default)      |
+| `logging`      | `{}`    | Request logging, see below                                   |
 
 ### SSL / TLS
 
@@ -107,6 +111,20 @@ To pin a CA bundle instead:
 
 ```ruby
 ssl_options: { ca_file: '/etc/icinga2/ca.crt' }
+```
+
+### Timeouts
+
+By default no timeout is applied. Set `open_timeout` / `timeout` (in seconds) to
+avoid hanging forever on an unresponsive Icinga2 instance:
+
+```ruby
+client = Icinga2::API::Client.new('https://icinga.example.net:5665',
+  username:     'admin',
+  password:     'pass',
+  open_timeout: 5,
+  timeout:      30
+)
 ```
 
 ### Logging
@@ -199,6 +217,37 @@ client.hosts
       .first
       .cancel
 ```
+
+## Error handling
+
+Transport errors are wrapped in this gem's own hierarchy so you never have to
+rescue Faraday exceptions directly. All of them inherit from
+`Icinga2::API::Error`:
+
+| Exception                              | Raised when                          |
+| -------------------------------------- | ------------------------------------ |
+| `Icinga2::API::Error::NotFound`        | server returned `404`                |
+| `Icinga2::API::Error::ClientError`     | server returned another `4xx`        |
+| `Icinga2::API::Error::ServerError`     | server returned a `5xx`              |
+| `Icinga2::API::Error::Timeout`         | the request timed out                |
+| `Icinga2::API::Error::ConnectionFailed`| the connection could not be opened   |
+
+```ruby
+begin
+  client.hosts.find('web01').services.find('ssh').schedule_downtime(...)
+rescue Icinga2::API::Error => e
+  warn "Icinga2 request failed: #{e.message}"
+end
+```
+
+> `Client#hosts.find` swallows `NotFound` and returns `nil`; every other error
+> propagates.
+
+## Thread safety
+
+A `Client` (and its underlying connection) is **not** safe to share across
+threads or fibers concurrently. Use one `Client` per thread/fiber, or guard
+access with your own mutex.
 
 ## Development
 
