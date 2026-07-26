@@ -1,0 +1,5 @@
+[settings]
+aqua.registries = ["https://github.com/jbox-web/aqua-registry"]
+
+[tools]
+"aqua:colbymchenry/codegraph" = "1.5.0"
