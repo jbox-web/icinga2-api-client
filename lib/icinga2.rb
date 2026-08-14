@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 # require ruby dependencies
+# cgi/escape rather than cgi: the full CGI library is gone in Ruby 4.0, and
+# CGI.escape/CGI.unescape is all this gem needs.
+require 'cgi/escape'
 require 'json'
 
 # require external dependencies
 require 'faraday'
-require 'active_support/core_ext/object/to_query'
 require 'zeitwerk'
 
 # load zeitwerk

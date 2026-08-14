@@ -103,12 +103,21 @@ module Icinga2
       end
 
       def build_url(path, query = {})
-        url = "#{base_url}/#{version}#{path}"
-        unless query.empty?
-          params = query.to_query
-          url += "?#{params}"
-        end
+        url    = "#{base_url}/#{version}#{path}"
+        params = encode_query(query)
+        url += "?#{params}" unless params.empty?
         url
+      end
+
+      # Icinga2 expects multi-valued parameters as a repeated key
+      # (attrs=a&attrs=b) and silently ignores the bracketed form
+      # (attrs[]=a&attrs[]=b) that ActiveSupport's #to_query emits: the request
+      # succeeds and every attribute comes back, so the caller cannot tell the
+      # restriction was dropped. Array values are therefore expanded by hand.
+      def encode_query(query)
+        query.flat_map do |key, value|
+          Array(value).map { |item| "#{CGI.escape(key.to_s)}=#{CGI.escape(item.to_s)}" }
+        end.join('&')
       end
 
       def client

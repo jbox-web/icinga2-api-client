@@ -67,4 +67,39 @@ RSpec.describe Icinga2::API::Client do
       expect(client.hosts).to be(first)
     end
   end
+
+  describe '#objects' do
+    it 'returns a generic collection for any catalogued type' do
+      collection = client.objects(:notification)
+      expect(collection).to be_a(Icinga2::API::Objects)
+      expect(collection.type.endpoint).to eq 'notifications'
+    end
+
+    it 'memoizes per type' do
+      users = client.objects(:user)
+      expect(client.objects(:user)).to be(users)
+      expect(client.objects(:user_group)).not_to be(users)
+    end
+
+    it 'raises on a type the catalog does not carry' do
+      expect { client.objects(:zone) }.to raise_error(Icinga2::API::Error::UnknownType)
+    end
+  end
+
+  describe 'the named collections' do
+    {
+      notifications:       'notifications',
+      users:               'users',
+      user_groups:         'usergroups',
+      time_periods:        'timeperiods',
+      host_groups:         'hostgroups',
+      service_groups:      'servicegroups',
+      dependencies:        'dependencies',
+      scheduled_downtimes: 'scheduleddowntimes'
+    }.each do |method, endpoint|
+      it "##{method} targets /#{endpoint}" do
+        expect(client.public_send(method).type.endpoint).to eq endpoint
+      end
+    end
+  end
 end

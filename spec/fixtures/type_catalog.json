@@ -1,0 +1,46 @@
+{
+  "types": {
+    "Host": {
+      "name": "Host",
+      "plural_name": "Hosts",
+      "endpoint": "hosts",
+      "base_chain": ["Checkable", "CustomVarObject", "ConfigObject", "Object"],
+      "fields": {
+        "__name": { "type": "String", "array_rank": 0, "config": false, "state": false, "required": false, "deprecated": false, "no_user_modify": true, "no_user_view": false },
+        "address": { "type": "String", "array_rank": 0, "config": true, "state": false, "required": false, "deprecated": false, "no_user_modify": false, "no_user_view": false },
+        "groups": { "type": "Array", "array_rank": 1, "config": true, "state": false, "required": false, "deprecated": false, "no_user_modify": false, "no_user_view": false }
+      },
+      "relations": {
+        "groups": { "ref_type": "HostGroup", "navigation_name": null, "array_rank": 1 }
+      }
+    },
+    "Widget": {
+      "name": "Widget",
+      "plural_name": "Widgets",
+      "endpoint": "widgets",
+      "base_chain": ["ConfigObject", "Object"],
+      "fields": {
+        "__name": { "type": "String", "array_rank": 0, "config": false, "state": false, "required": false, "deprecated": false, "no_user_modify": true, "no_user_view": false }
+      },
+      "relations": {}
+    },
+    "Notification": {
+      "name": "Notification",
+      "plural_name": "Notifications",
+      "endpoint": "notifications",
+      "base_chain": ["CustomVarObject", "ConfigObject", "Object"],
+      "fields": {
+        "__name": { "type": "String", "array_rank": 0, "config": false, "state": false, "required": false, "deprecated": false, "no_user_modify": true, "no_user_view": false },
+        "host_name": { "type": "String", "array_rank": 0, "config": true, "state": false, "required": true, "deprecated": false, "no_user_modify": true, "no_user_view": false },
+        "service_name": { "type": "String", "array_rank": 0, "config": true, "state": false, "required": false, "deprecated": false, "no_user_modify": true, "no_user_view": false },
+        "period": { "type": "String", "array_rank": 0, "config": true, "state": false, "required": false, "deprecated": false, "no_user_modify": false, "no_user_view": false },
+        "users": { "type": "Array", "array_rank": 1, "config": true, "state": false, "required": false, "deprecated": false, "no_user_modify": false, "no_user_view": false }
+      },
+      "relations": {
+        "host_name": { "ref_type": "Host", "navigation_name": "host", "array_rank": 0 },
+        "period": { "ref_type": "TimePeriod", "navigation_name": "period", "array_rank": 0 },
+        "users": { "ref_type": "User", "navigation_name": null, "array_rank": 1 }
+      }
+    }
+  }
+}

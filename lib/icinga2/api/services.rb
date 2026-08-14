@@ -14,9 +14,7 @@ module Icinga2
       # Icinga only accept double quote in query string
       # https://www.icinga.com/docs/icinga2/latest/doc/12-icinga2-api/#advanced-filters
       def all
-        fetch_services.collect do |service_attributes|
-          build_service(service_attributes['attrs'])
-        end
+        services.all(filter: "match(\"#{Objects.escape(host.name)}\", service.host_name)")
       end
 
       def find(name)
@@ -24,31 +22,26 @@ module Icinga2
       end
 
       def downtimes
-        raw = fetch_downtimes
-        return [] if raw.empty?
+        services_by_name = nil
 
-        # Resolve services once instead of per downtime (avoids N+1).
-        services_by_name = all.to_h { |service| [service.name, service] }
-        raw.collect do |downtime_attributes|
-          attrs = downtime_attributes['attrs']
+        # Resolved once, and only if a downtime came back at all: the lookup is
+        # a request of its own (avoids both the N+1 and a pointless call).
+        filter = "service.host_name==\"#{Objects.escape(host.name)}\""
+
+        downtimes_collection.all(filter: filter, force_post: true) do |attrs|
+          services_by_name ||= all.to_h { |service| [service.name, service] }
           build_downtime(attrs, services_by_name[attrs['service_name']])
         end
       end
 
       private
 
-      def fetch_services
-        api_client.api.get('/objects/services', query: { filter: "match(\"#{host.name}\", service.host_name)" })
+      def services
+        @services ||= Objects.new(api_client: api_client, type: :service, context: { host: host })
       end
 
-      def fetch_downtimes
-        opts    = { filter: "service.host_name==\"#{host.name}\"" }
-        headers = { 'X-HTTP-Method-Override' => 'GET' }
-        api_client.api.post('/objects/downtimes', params: opts, headers: headers)
-      end
-
-      def build_service(attrs)
-        Service.new attrs.merge(api_client: api_client, host: host)
+      def downtimes_collection
+        @downtimes_collection ||= Objects.new(api_client: api_client, type: :downtime, context: { host: host })
       end
 
       def build_downtime(attrs, service)

@@ -32,6 +32,15 @@ module Icinga2
       # The server answered with a 5xx status.
       class ServerError < Error; end
 
+      # The requested Icinga2 object type is absent from the bundled type
+      # catalog. Raised locally, without any request being sent.
+      class UnknownType < Error; end
+
+      # The type is known, but the field asked for declares no reference to
+      # another object. Kept separate from UnknownType so that rescuing a
+      # missing type does not also swallow a bad navigation. Raised locally.
+      class UnknownRelation < Error; end
+
     end
 
   end

@@ -20,9 +20,10 @@ Gem::Specification.new do |s|
     'bug_tracker_uri' => 'https://github.com/jbox-web/icinga2-api-client/issues'
   }
 
-  s.files = Dir['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/**/*.rb']
+  # data/ carries the frozen Icinga2 type catalog read by TypeCatalog at
+  # runtime; without it the generic object layer cannot resolve endpoints.
+  s.files = Dir['README.md', 'LICENSE', 'CHANGELOG.md', 'lib/**/*.rb', 'data/**/*.json']
 
-  s.add_dependency 'activesupport', '>= 7.0'
   s.add_dependency 'faraday', '~> 2.0'
   s.add_dependency 'zeitwerk', '~> 2.6'
 end

@@ -12,7 +12,7 @@ Do **not** read or display secrets (passwords, tokens, API keys). They live in s
 
 ## Overview
 
-`icinga2-api-client` is a Ruby gem that wraps the [Icinga2 REST API](https://www.icinga.com/docs/icinga2/latest/doc/12-icinga2-api/) in a fluent, chainable object model (`client.hosts.find('h').services.find('ssh').schedule_downtime(...)`). It targets Ruby >= 3.2 and depends only on `faraday`, `activesupport`, and `zeitwerk`.
+`icinga2-api-client` is a Ruby gem that wraps the [Icinga2 REST API](https://www.icinga.com/docs/icinga2/latest/doc/12-icinga2-api/) in a fluent, chainable object model (`client.hosts.find('h').services.find('ssh').schedule_downtime(...)`). It targets Ruby >= 3.2 and depends only on `faraday` and `zeitwerk`.
 
 ## Commands
 

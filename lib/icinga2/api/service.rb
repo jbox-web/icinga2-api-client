@@ -20,25 +20,45 @@ module Icinga2
       alias to_s full_name
 
       def downtimes
-        fetch_downtimes.collect do |downtime_attributes|
-          build_downtime(downtime_attributes['attrs'])
-        end
+        scoped_objects(:downtime)
       end
 
       def comments
-        fetch_comments.collect do |comment_attributes|
-          Comment.new comment_attributes['attrs'].merge(api_client: api_client, host: host, service: self)
-        end
+        scoped_objects(:comment)
+      end
+
+      # The notification rules attached to this service.
+      def notifications
+        service_level_objects(:notification)
+      end
+
+      # The recurring downtime rules targeting this service.
+      def scheduled_downtimes
+        service_level_objects(:scheduled_downtime)
+      end
+
+      # The groups this service belongs to, as objects. #groups keeps returning
+      # the raw names the API sent.
+      def service_groups
+        Objects.new(api_client: api_client, type: :service_group).find_many(Array(to_h[:groups]))
       end
 
       private
+
+      def service_level_objects(type)
+        collection = Objects.new(api_client: api_client, type: type, context: { host: host, service: self })
+        variable   = collection.type.filter_variable
+        escaped    = [Objects.escape(host.name), Objects.escape(name)]
+
+        collection.all(filter: %(#{variable}.host_name=="#{escaped.first}"&&#{variable}.service_name=="#{escaped.last}"))
+      end
 
       def action_type
         'Service'
       end
 
       def action_filter
-        "service.name==\"#{name}\" && service.host_name==\"#{host.name}\""
+        "service.name==\"#{Objects.escape(name)}\" && service.host_name==\"#{Objects.escape(host.name)}\""
       end
 
       def build_scheduled_downtime(name)
@@ -49,21 +69,16 @@ module Icinga2
         Comment.new('__name' => name, api_client: api_client, host: host, service: self)
       end
 
-      def fetch_downtimes
-        fetch_objects('/objects/downtimes')
-      end
-
-      def fetch_comments
-        fetch_objects('/objects/comments')
-      end
-
-      def fetch_objects(path)
-        headers = { 'X-HTTP-Method-Override' => 'GET' }
-        api_client.api.post(path, params: { filter: action_filter }, headers: headers)
-      end
-
-      def build_downtime(attrs)
-        Downtime.new attrs.merge(api_client: api_client, host: host, service: self)
+      # Downtimes and comments of this service.
+      #
+      # Filtered through #action_filter, i.e. on the service's own variables
+      # rather than on downtime.host_name / downtime.service_name: that is the
+      # filter this collection has always sent, and the recorded cassettes
+      # match on method and URI only, so a rewrite here would go unnoticed by
+      # the suite. Posted for the same reason.
+      def scoped_objects(type)
+        Objects.new(api_client: api_client, type: type, context: { host: host, service: self })
+               .all(filter: action_filter, force_post: true)
       end
 
     end

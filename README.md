@@ -25,6 +25,9 @@ Largely copied (and adapted) from [gdi/ruby-nagios-api-client](https://github.co
   - [Hosts](#hosts)
   - [Services](#services)
   - [Downtimes](#downtimes)
+  - [Notifications](#notifications)
+  - [Groups, users and time periods](#groups-users-and-time-periods)
+  - [Generic objects](#generic-objects)
 - [Error handling](#error-handling)
 - [Thread safety](#thread-safety)
 - [Development](#development)
@@ -175,10 +178,8 @@ puts YAML.dump client.hosts.find('web01').services.find('ssh').to_s
 #### Schedule a downtime
 
 ```ruby
-require 'active_support/all' # for 1.hour
-
-duration   = 1.hour
-start_time = DateTime.now
+duration   = 3600 # seconds
+start_time = Time.now
 end_time   = start_time + duration
 
 # Icinga expects Unix timestamps, so call #to_i on the times.
@@ -258,6 +259,104 @@ client.hosts
       .cancel
 ```
 
+### Notifications
+
+A `Notification` is the *configuration* deciding who gets told about a problem:
+it is not `Actions#send_notification`, which fires a one-off custom
+notification.
+
+```ruby
+# Notification rules attached to the host itself
+client.hosts.find('web01').notifications
+
+# ... and to one of its services
+client.hosts.find('web01').services.find('ssh').notifications
+
+# Every notification on the server. Mind the volume: a mid-sized master carries
+# tens of thousands of them, so filter and restrict the attributes returned.
+client.notifications.all(
+  filter: 'notification.host_name=="web01"',
+  attrs:  %w[__name users period]
+)
+```
+
+From a notification you can reach what it points at. The readers named after an
+attribute keep returning what the API sent (`#users` is an Array of names);
+resolving them into objects is done through the explicitly named methods:
+
+```ruby
+notification = client.hosts.find('web01').notifications.first
+
+notification.users                 # => ["admin", "oncall"]   (raw, no request)
+notification.notified_users        # => [#<User admin>, ...]  (one request)
+notification.notified_user_groups
+notification.time_period           # => #<TimePeriod 24x7>
+notification.notification_command
+notification.host                  # => #<Host web01>
+notification.service               # => nil for a host-level notification
+```
+
+### Groups, users and time periods
+
+```ruby
+client.users.all
+client.user_groups.all
+client.time_periods.all
+client.host_groups.all
+client.service_groups.all
+client.dependencies.all
+client.scheduled_downtimes.all
+```
+
+Membership is held by the member, not by the group, so both directions are
+available:
+
+```ruby
+host = client.hosts.find('web01')
+host.groups        # => ["linux", "prod"]   (raw names, no request)
+host.host_groups   # => [#<HostGroup linux>, #<HostGroup prod>]
+
+client.host_groups.find('linux').hosts   # => the members
+client.user_groups.find('oncall').users
+```
+
+`ScheduledDowntime` is a recurring *rule*, not an active downtime — the
+downtimes it creates are what `Host#downtimes` and `Service#downtimes` return:
+
+```ruby
+host.scheduled_downtimes   # the rules
+host.downtimes             # the downtimes currently in effect
+```
+
+### Generic objects
+
+Every collection above is a `Icinga2::API::Objects` over a type described by
+the catalog shipped with the gem (`data/icinga2_types.json`, a frozen snapshot
+of the server's own `/v1/types`). Any catalogued type is reachable generically:
+
+```ruby
+client.objects(:time_period).all(filter: 'timeperiod.__name=="24x7"')
+client.objects(:notification).find('web01!ssh!mail')
+```
+
+`#all` accepts `filter:`, `attrs:` and `joins:`, and switches by itself to
+`POST` with `X-HTTP-Method-Override: GET` when the query outgrows the request
+line. References declared by Icinga2 can be followed generically too:
+
+```ruby
+notification.navigate(:period)   # => #<TimePeriod 24x7>
+notification.navigate(:users)    # => [#<User admin>, ...]  (a single request)
+```
+
+> `#navigate` deliberately does not define readers named after the fields it
+> follows. `notification.period` keeps returning the String the API sent, so an
+> attribute never changes type under an existing caller.
+
+The catalog covers the types this gem models: `Host`, `Service`, `Downtime`,
+`Comment`, `Notification`, `User`, `UserGroup`, `TimePeriod`, `HostGroup`,
+`ServiceGroup`, `Dependency`, `ScheduledDowntime`. Anything else raises
+`Icinga2::API::Error::UnknownType`, locally, without a request being sent.
+
 ### Event stream
 
 `Client#subscribe` opens the Icinga2 event stream and **blocks**, yielding each
@@ -318,6 +417,24 @@ ICINGA_API_URL=https://icinga.example.net:5665 \
 ICINGA_API_USER=root ICINGA_API_PASSWORD=secret \
 bin/rspec spec/integration
 ```
+
+### Regenerating the type catalog
+
+`data/icinga2_types.json` is a frozen snapshot of a master's `/v1/types`. It is
+committed rather than fetched at runtime so that the gem's surface does not
+depend on which server is contacted and the suite runs without one. Regenerate
+it after an Icinga2 upgrade, and review the diff:
+
+```sh
+ICINGA_API_URL=https://icinga.example.net:5665 \
+ICINGA_API_PASSWORD=secret \
+bin/rake types:snapshot
+
+# ... or from a saved /v1/types response, without handing over credentials:
+TYPES_JSON=./types.json bin/rake types:snapshot
+```
+
+The output is deterministic: the same input yields a byte-identical file.
 
 ## Contribute
 

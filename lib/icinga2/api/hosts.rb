@@ -11,10 +11,12 @@ module Icinga2
       end
 
       def all
-        hosts = api_client.api.get('/objects/hosts')
-        hosts.filter_map { |h| build_host(h['attrs']) if h['attrs'] }
+        objects.all
       end
 
+      # Kept on the dedicated ?host=<name> form rather than Objects#find's
+      # __name filter: it is the URL this collection has always sent, and the
+      # recorded cassettes match on it.
       def find(hostname)
         begin
           hosts = api_client.api.get('/objects/hosts', query: { host: hostname })
@@ -27,6 +29,10 @@ module Icinga2
       end
 
       private
+
+      def objects
+        @objects ||= Objects.new(api_client: api_client, type: :host)
+      end
 
       def build_host(attrs)
         Host.new attrs.merge(api_client: api_client)

@@ -69,6 +69,28 @@ RSpec.describe Icinga2::API::Interface do
         .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
       expect(interface.get('/objects/services', query: { filter: 'service.host_name=="web01"' })).to eq []
     end
+
+    # Icinga2 expects a repeated key (attrs=a&attrs=b) and silently IGNORES the
+    # bracketed form (attrs[]=a) that Rails' #to_query produces, answering with
+    # every attribute instead of the requested subset. Verified against a live
+    # master: the bracketed form returns the full object with a 200.
+    it 'repeats the key for array values instead of bracketing it' do
+      stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/users?attrs=__name&attrs=email')
+        .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
+      expect(interface.get('/objects/users', query: { attrs: %w[__name email] })).to eq []
+    end
+
+    it 'escapes each repeated value' do
+      stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/services?joins=host.name&attrs=last_check_result')
+        .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
+      expect(interface.get('/objects/services', query: { joins: ['host.name'], attrs: ['last_check_result'] })).to eq []
+    end
+
+    it 'drops empty array values rather than emitting a bare key' do
+      stub_request(:get, 'https://icinga2.example.net:5665/v1/objects/users?attrs=__name')
+        .to_return(status: 200, body: '{"results":[]}', headers: { 'Content-Type' => 'application/json' })
+      expect(interface.get('/objects/users', query: { attrs: ['__name'], joins: [] })).to eq []
+    end
   end
 
   describe '#stream' do

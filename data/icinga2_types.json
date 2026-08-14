@@ -1,0 +1,5272 @@
+{
+  "types": {
+    "Comment": {
+      "name": "Comment",
+      "plural_name": "Comments",
+      "endpoint": "comments",
+      "base_chain": [
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "author": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "entry_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "entry_type": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "expire_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "host_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "legacy_id": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "persistent": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "remove_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "removed_by": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "service_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "sticky": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "text": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "host_name": {
+          "ref_type": "Host",
+          "navigation_name": "host",
+          "array_rank": 0
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "Dependency": {
+      "name": "Dependency",
+      "plural_name": "Dependencies",
+      "endpoint": "dependencies",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "child_host_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "child_service_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "disable_checks": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "disable_notifications": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "ignore_soft_states": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "parent_host_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "parent_service_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "period": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "redundancy_group": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_filter_real": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "states": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "child_host_name": {
+          "ref_type": "Host",
+          "navigation_name": "child_host",
+          "array_rank": 0
+        },
+        "parent_host_name": {
+          "ref_type": "Host",
+          "navigation_name": "parent_host",
+          "array_rank": 0
+        },
+        "period": {
+          "ref_type": "TimePeriod",
+          "navigation_name": "period",
+          "array_rank": 0
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "Downtime": {
+      "name": "Downtime",
+      "plural_name": "Downtimes",
+      "endpoint": "downtimes",
+      "base_chain": [
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "author": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "authoritative_zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "comment": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "config_owner": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "config_owner_hash": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "duration": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "end_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "entry_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "fixed": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "host_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "legacy_id": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "parent": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "remove_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "removed_by": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "scheduled_by": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "service_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "start_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "trigger_time": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "triggered_by": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "triggers": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "was_cancelled": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "host_name": {
+          "ref_type": "Host",
+          "navigation_name": "host",
+          "array_rank": 0
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "Host": {
+      "name": "Host",
+      "plural_name": "Hosts",
+      "endpoint": "hosts",
+      "base_chain": [
+        "Checkable",
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "acknowledgement": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "acknowledgement_expiry": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "acknowledgement_last_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "action_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "address": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "address6": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_attempt": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_command": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_interval": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_period": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_timeout": {
+          "type": "Value",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "command_endpoint": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "display_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "downtime_depth": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_active_checks": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_event_handler": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_flapping": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_notifications": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_passive_checks": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_perfdata": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "event_command": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "executions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_buffer": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_current": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_ignore_states": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_ignore_states_filter_real": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_index": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_last_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_last_state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_threshold": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": true,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_threshold_high": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_threshold_low": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "force_next_check": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "force_next_notification": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "groups": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "handled": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "icon_image": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icon_image_alt": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_check": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_check_result": {
+          "type": "CheckResult",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_check_started": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_hard_state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_hard_state_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_hard_state_raw": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_hard_states_raw": {
+          "type": "unsigned short",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_reachable": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_soft_states_raw": {
+          "type": "unsigned short",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_down": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_raw": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_state_type": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_unreachable": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_up": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "max_check_attempts": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "next_check": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "next_update": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "notes": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "notes_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pending_executions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "previous_state_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "problem": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "retry_interval": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "severity": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "state_before_suppression": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_raw": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_type": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "suppressed_notifications": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "volatile": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "check_command": {
+          "ref_type": "CheckCommand",
+          "navigation_name": "check_command",
+          "array_rank": 0
+        },
+        "check_period": {
+          "ref_type": "TimePeriod",
+          "navigation_name": "check_period",
+          "array_rank": 0
+        },
+        "command_endpoint": {
+          "ref_type": "Endpoint",
+          "navigation_name": "command_endpoint",
+          "array_rank": 0
+        },
+        "event_command": {
+          "ref_type": "EventCommand",
+          "navigation_name": "event_command",
+          "array_rank": 0
+        },
+        "groups": {
+          "ref_type": "HostGroup",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "HostGroup": {
+      "name": "HostGroup",
+      "plural_name": "HostGroups",
+      "endpoint": "hostgroups",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "action_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "display_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "groups": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "notes": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "notes_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "groups": {
+          "ref_type": "HostGroup",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "Notification": {
+      "name": "Notification",
+      "plural_name": "Notifications",
+      "endpoint": "notifications",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "command": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "command_endpoint": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "host_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "interval": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_notification": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_notified_state_per_user": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_problem_notification": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "next_notification": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "no_more_notifications": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "notification_number": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "notified_problem_users": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "period": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "service_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stashed_notifications": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_filter_real": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "states": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "suppressed_notifications": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "times": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "type_filter_real": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "types": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "user_groups": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "users": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "command": {
+          "ref_type": "NotificationCommand",
+          "navigation_name": "command",
+          "array_rank": 0
+        },
+        "command_endpoint": {
+          "ref_type": "Endpoint",
+          "navigation_name": "command_endpoint",
+          "array_rank": 0
+        },
+        "host_name": {
+          "ref_type": "Host",
+          "navigation_name": "host",
+          "array_rank": 0
+        },
+        "period": {
+          "ref_type": "TimePeriod",
+          "navigation_name": "period",
+          "array_rank": 0
+        },
+        "user_groups": {
+          "ref_type": "UserGroup",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "users": {
+          "ref_type": "User",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "ScheduledDowntime": {
+      "name": "ScheduledDowntime",
+      "plural_name": "ScheduledDowntimes",
+      "endpoint": "scheduleddowntimes",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "author": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "child_options": {
+          "type": "Value",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "comment": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "duration": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "fixed": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "host_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "ranges": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "service_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "host_name": {
+          "ref_type": "Host",
+          "navigation_name": "host",
+          "array_rank": 0
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "Service": {
+      "name": "Service",
+      "plural_name": "Services",
+      "endpoint": "services",
+      "base_chain": [
+        "Checkable",
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "acknowledgement": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "acknowledgement_expiry": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "acknowledgement_last_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "action_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "check_attempt": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_command": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_interval": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_period": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "check_timeout": {
+          "type": "Value",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "command_endpoint": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "display_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "downtime_depth": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_active_checks": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_event_handler": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_flapping": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_notifications": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_passive_checks": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_perfdata": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "event_command": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "executions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_buffer": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_current": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_ignore_states": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_ignore_states_filter_real": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_index": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_last_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_last_state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "flapping_threshold": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": true,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_threshold_high": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "flapping_threshold_low": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "force_next_check": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "force_next_notification": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "groups": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "handled": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "host": {
+          "type": "Host",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "host_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "icon_image": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icon_image_alt": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_check": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_check_result": {
+          "type": "CheckResult",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_check_started": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_hard_state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_hard_state_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_hard_state_raw": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_hard_states_raw": {
+          "type": "unsigned short",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_reachable": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_soft_states_raw": {
+          "type": "unsigned short",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_critical": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_ok": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_raw": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_state_type": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_unknown": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_unreachable": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "last_state_warning": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "max_check_attempts": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "next_check": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "next_update": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "notes": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "notes_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pending_executions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "previous_state_change": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "problem": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "retry_interval": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "severity": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "state_before_suppression": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_raw": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_type": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "suppressed_notifications": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "volatile": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "check_command": {
+          "ref_type": "CheckCommand",
+          "navigation_name": "check_command",
+          "array_rank": 0
+        },
+        "check_period": {
+          "ref_type": "TimePeriod",
+          "navigation_name": "check_period",
+          "array_rank": 0
+        },
+        "command_endpoint": {
+          "ref_type": "Endpoint",
+          "navigation_name": "command_endpoint",
+          "array_rank": 0
+        },
+        "event_command": {
+          "ref_type": "EventCommand",
+          "navigation_name": "event_command",
+          "array_rank": 0
+        },
+        "groups": {
+          "ref_type": "ServiceGroup",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "host_name": {
+          "ref_type": "Host",
+          "navigation_name": null,
+          "array_rank": 0
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "ServiceGroup": {
+      "name": "ServiceGroup",
+      "plural_name": "ServiceGroups",
+      "endpoint": "servicegroups",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "action_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "display_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "groups": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "notes": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "notes_url": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "groups": {
+          "ref_type": "ServiceGroup",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "TimePeriod": {
+      "name": "TimePeriod",
+      "plural_name": "TimePeriods",
+      "endpoint": "timeperiods",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "display_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "excludes": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "includes": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "is_inside": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "prefer_includes": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "ranges": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "segments": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "update": {
+          "type": "Function",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "valid_begin": {
+          "type": "Value",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "valid_end": {
+          "type": "Value",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "excludes": {
+          "ref_type": "TimePeriod",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "includes": {
+          "ref_type": "TimePeriod",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "User": {
+      "name": "User",
+      "plural_name": "Users",
+      "endpoint": "users",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "display_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "email": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "enable_notifications": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "groups": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "last_notification": {
+          "type": "Timestamp",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pager": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "period": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_filter_real": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "states": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "type_filter_real": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "types": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "groups": {
+          "ref_type": "UserGroup",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "period": {
+          "ref_type": "TimePeriod",
+          "navigation_name": "period",
+          "array_rank": 0
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    },
+    "UserGroup": {
+      "name": "UserGroup",
+      "plural_name": "UserGroups",
+      "endpoint": "usergroups",
+      "base_chain": [
+        "CustomVarObject",
+        "ConfigObject",
+        "Object"
+      ],
+      "fields": {
+        "__name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "active": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "display_name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "extensions": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "groups": {
+          "type": "Array",
+          "array_rank": 1,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "ha_mode": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "icingadb_identifier": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "name": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": true,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "original_attributes": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "package": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "pause_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "paused": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "resume_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "source_location": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "start_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "state_loaded": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "stop_called": {
+          "type": "Boolean",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": true
+        },
+        "templates": {
+          "type": "Array",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "type": {
+          "type": "String",
+          "array_rank": 0,
+          "config": false,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "vars": {
+          "type": "Dictionary",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": false,
+          "no_user_view": false
+        },
+        "version": {
+          "type": "Number",
+          "array_rank": 0,
+          "config": false,
+          "state": true,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        },
+        "zone": {
+          "type": "String",
+          "array_rank": 0,
+          "config": true,
+          "state": false,
+          "required": false,
+          "deprecated": false,
+          "no_user_modify": true,
+          "no_user_view": false
+        }
+      },
+      "relations": {
+        "groups": {
+          "ref_type": "UserGroup",
+          "navigation_name": null,
+          "array_rank": 1
+        },
+        "zone": {
+          "ref_type": "Zone",
+          "navigation_name": null,
+          "array_rank": 0
+        }
+      }
+    }
+  }
+}
