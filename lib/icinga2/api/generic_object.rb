@@ -15,8 +15,17 @@ module Icinga2
     # object of a different class would silently break existing callers.
     class GenericObject < Resource
 
-      attr_reader :icinga_type, :host, :service
+      # @return [String, nil] the Icinga type name, when it was threaded in
+      attr_reader :icinga_type
 
+      # @return [Host, nil] the host this object was reached from, if any
+      attr_reader :host
+
+      # @return [Service, nil] the service this object was reached from, if any
+      attr_reader :service
+
+      # @param args [Hash] the object's attributes, plus `:api_client`,
+      #   `:icinga_type` and optionally `:host` / `:service`
       def initialize(args = {})
         @icinga_type = args.delete(:icinga_type)
         @host        = args.delete(:host)
@@ -27,23 +36,28 @@ module Icinga2
         super
       end
 
+      # @return [String] the object's Icinga `__name`
       def full_name
         __name
       end
 
+      # @!method to_s
+      #   Alias of {#full_name}.
+      #   @return [String]
       alias to_s full_name
 
-      # Memoize a navigation under +key+, nil results included: `@x ||= …`
-      # would re-issue the request on every call whenever it resolves to
-      # nothing, which is the common case for a host-level object.
-      def memoized(key)
-        return @memoized[key] if @memoized.key?(key)
-
-        @memoized[key] = yield
-      end
-
       # Resolve a declared reference into the object(s) it points at.
-      # Returns nil (or [] for a list) when the field carries no value.
+      #
+      # @example
+      #   notification.navigate(:period) #=> #<TimePeriod 24x7>
+      #   notification.navigate(:users)  #=> [#<User admin>, ...], one request
+      #
+      # @param field [String, Symbol] a field declaring a reference
+      # @return [Resource, Array<Resource>, nil] one object for a plain
+      #   reference (nil when the attribute is empty), an Array for a list
+      #   (empty when the attribute is)
+      # @raise [Error::UnknownRelation] if the field declares no reference
+      # @raise [Error] on any transport or HTTP failure
       def navigate(field)
         relation = type.relation(field.to_s)
         raise Error::UnknownRelation, "'#{type.name}' declares no reference on '#{field}'" if relation.nil?
@@ -53,11 +67,26 @@ module Icinga2
       end
 
       # The catalog entry describing this object's type.
+      #
+      # @return [TypeCatalog::Type]
+      # @raise [Error::UnknownType] if the catalog does not carry it
       def type
         @type ||= TypeCatalog.default.fetch(icinga_type || self.class.name.split('::').last)
       end
 
       private
+
+      # Memoize a navigation under +key+, nil results included: `@x ||= …`
+      # would re-issue the request on every call whenever it resolves to
+      # nothing, which is the common case for a host-level object.
+      #
+      # @param key [Symbol]
+      # @return [Object] whatever the block returned, once
+      def memoized(key)
+        return @memoized[key] if @memoized.key?(key)
+
+        @memoized[key] = yield
+      end
 
       # Resolve a Service from a (host_name, service_name) attribute pair.
       #

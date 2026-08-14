@@ -17,5 +17,6 @@ Zeitwerk::Loader.for_gem.tap do |loader|
   loader.setup
 end
 
+# Namespace of the gem. Everything user-facing lives under {Icinga2::API}.
 module Icinga2
 end

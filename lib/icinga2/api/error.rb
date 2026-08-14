@@ -10,8 +10,12 @@ module Icinga2
 
       # The Faraday response hash ({ status:, headers:, body:, ... }) when the
       # error originates from an HTTP response; nil for connection/timeout errors.
+      #
+      # @return [Hash, nil]
       attr_reader :response
 
+      # @param message [String, nil]
+      # @param response [Hash, nil] the Faraday response, when there was one
       def initialize(message = nil, response: nil)
         @response = response
         super(message)

@@ -2,25 +2,51 @@
 
 module Icinga2
   module API
+    # The services of one host, reached through {Host#services}.
+    #
+    # @example
+    #   client.hosts.find('web01').services.find('ssh')
     class Services
 
-      attr_reader :api_client, :host
+      # @return [Client]
+      attr_reader :api_client
 
+      # @return [Host] the host these services belong to
+      attr_reader :host
+
+      # @param args [Hash]
+      # @option args [Client] :api_client
+      # @option args [Host] :host
       def initialize(args = {})
         @api_client = args[:api_client]
         @host = args[:host]
       end
 
+      # Every service of {#host}.
+      #
       # Icinga only accept double quote in query string
       # https://www.icinga.com/docs/icinga2/latest/doc/12-icinga2-api/#advanced-filters
+      #
+      # @return [Array<Service>]
+      # @raise [Error] on any transport or HTTP failure
       def all
         services.all(filter: "match(\"#{Objects.escape(host.name)}\", service.host_name)")
       end
 
+      # Look one of them up by name. Filtered client-side, over {#all}.
+      #
+      # @param name [String] the short name, e.g. "ssh", not "web01!ssh"
+      # @return [Service, nil]
+      # @raise [Error] on any transport or HTTP failure
       def find(name)
         all.find { |service| service.name == name }
       end
 
+      # The downtimes of every service of {#host}, each tied back to the
+      # service it belongs to.
+      #
+      # @return [Array<Downtime>]
+      # @raise [Error] on any transport or HTTP failure
       def downtimes
         services_by_name = nil
 

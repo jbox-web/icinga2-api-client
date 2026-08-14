@@ -11,14 +11,27 @@ module Icinga2
     # any of it per type.
     class TypeCatalog
 
+      # @return [String] path of the snapshot shipped with the gem
       SNAPSHOT_PATH = File.expand_path('../../../data/icinga2_types.json', __dir__)
 
       # A reference from one object type to another, as declared by Icinga2
       # through the +ref_type+ / +navigation_name+ / +array_rank+ triplet.
       class Relation
 
-        attr_reader :field, :ref_type, :navigation_name, :array_rank
+        # @return [String] the field holding the reference, e.g. "host_name"
+        attr_reader :field
 
+        # @return [String] the Icinga type pointed at, e.g. "Host"
+        attr_reader :ref_type
+
+        # @return [String, nil] Icinga's own name for the arc, when it has one
+        attr_reader :navigation_name
+
+        # @return [Integer] 0 for a single reference, 1 for a list
+        attr_reader :array_rank
+
+        # @param field [String]
+        # @param attributes [Hash] the catalog entry for that field
         def initialize(field, attributes)
           @field           = field
           @ref_type        = attributes['ref_type']
@@ -28,6 +41,8 @@ module Icinga2
         end
 
         # Whether the field holds a list of references rather than a single one.
+        #
+        # @return [Boolean]
         def collection?
           array_rank.positive?
         end
@@ -38,8 +53,25 @@ module Icinga2
       # points to.
       class Type
 
-        attr_reader :name, :plural_name, :endpoint, :base_chain, :fields, :relations
+        # @return [String] the Icinga type name, e.g. "ScheduledDowntime"
+        attr_reader :name
 
+        # @return [String] its plural, e.g. "ScheduledDowntimes"
+        attr_reader :plural_name
+
+        # @return [String] the path segment under /v1/objects/
+        attr_reader :endpoint
+
+        # @return [Array<String>] ancestors, nearest first
+        attr_reader :base_chain
+
+        # @return [Hash{String => Hash}] every field, inherited ones included
+        attr_reader :fields
+
+        # @return [Hash{String => Relation}] the references this type declares
+        attr_reader :relations
+
+        # @param attributes [Hash] one entry of the snapshot
         def initialize(attributes)
           @name        = attributes['name']
           @plural_name = attributes['plural_name']
@@ -54,17 +86,25 @@ module Icinga2
         # the type name lowercased and unseparated ("scheduleddowntime").
         # Getting it wrong answers 404 "No objects found" instead of an error,
         # so it is derived rather than written out.
+        #
+        # @return [String]
         def filter_variable
           name.downcase
         end
 
+        # @param name [String, Symbol]
+        # @return [Boolean] whether the type declares that field
         def field?(name)
           fields.key?(name.to_s)
         end
 
-        # The Relation declared on +name+, or nil when that field references
-        # nothing. Note that Icinga2 declares no reference on any service_name
-        # field: those arcs are wired by hand in the resource classes.
+        # The reference declared on +name+.
+        #
+        # Note that Icinga2 declares none on any `service_name` field, on any
+        # type: those arcs are wired by hand in the resource classes.
+        #
+        # @param name [String, Symbol]
+        # @return [Relation, nil] nil when that field references nothing
         def relation(name)
           relations[name.to_s]
         end
@@ -81,31 +121,40 @@ module Icinga2
 
       class << self
 
-        # The catalog shipped with the gem. Loaded once per process.
+        # The catalog shipped with the gem. Loaded once per process, and frozen
+        # all the way down, so it is safe to share.
+        #
+        # @return [TypeCatalog]
         def default
           @default ||= new(SNAPSHOT_PATH)
         end
 
       end
 
+      # @param path [String] a snapshot to read instead of the bundled one
       def initialize(path = SNAPSHOT_PATH)
         @path  = path
         @types = load_types(path)
       end
 
+      # @return [String] the snapshot this catalog was read from
       attr_reader :path
 
-      # Icinga type names, sorted, e.g. ["Comment", "Dependency", ...].
+      # @return [Array<String>] Icinga type names, sorted
       def names
         @types.keys.sort
       end
 
+      # @param name [String, Symbol]
+      # @return [Boolean] whether the catalog carries that type
       def key?(name)
         @types.key?(normalize(name))
       end
 
-      # Accepts the Icinga name ("ScheduledDowntime") or a snake_case symbol
-      # (:scheduled_downtime).
+      # @param name [String, Symbol] Icinga name ("ScheduledDowntime") or
+      #   snake_case symbol (`:scheduled_downtime`)
+      # @return [Type]
+      # @raise [Error::UnknownType] if the catalog does not carry it
       def fetch(name)
         type = normalize(name)
         @types.fetch(type) do

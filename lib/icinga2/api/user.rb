@@ -11,6 +11,10 @@ module Icinga2
         navigate(:groups)
       end
 
+      # The period during which the user is notified.
+      #
+      # @return [TimePeriod, nil]
+      # @raise [Error] on any transport or HTTP failure
       def time_period
         navigate(:period)
       end

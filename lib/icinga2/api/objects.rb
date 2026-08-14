@@ -12,25 +12,54 @@ module Icinga2
       # Past this, Icinga2 (and any proxy in front of it) starts rejecting the
       # request line, so the call is sent as a POST carrying the parameters in
       # its body with the method-override header.
+      # @return [Integer] budget for the percent-encoded request line, in bytes
       MAX_QUERY_LENGTH = 2_000
 
+      # @return [Hash{String => String}] header turning a POST into a GET
       METHOD_OVERRIDE_HEADERS = { 'X-HTTP-Method-Override' => 'GET' }.freeze
 
-      attr_reader :api_client, :type, :context
+      # @return [Client] the client every request goes through
+      attr_reader :api_client
 
+      # @return [TypeCatalog::Type] the catalog entry this collection covers
+      attr_reader :type
+
+      # @return [Hash] extra attributes woven into every object built, e.g.
+      #   `{ host: <Host> }` so a child can reach back to its parent
+      attr_reader :context
+
+      # @param api_client [Client]
+      # @param type [Symbol, String] Icinga name or snake_case symbol
+      # @param catalog [TypeCatalog] the catalog to resolve +type+ against
+      # @param context [Hash] merged into every object built
+      # @raise [Error::UnknownType] if the catalog does not carry that type
       def initialize(api_client:, type:, catalog: TypeCatalog.default, context: {})
         @api_client = api_client
         @type       = catalog.fetch(type)
         @context    = context
       end
 
-      # +force_post+ sends the request as a POST whatever its size. Downtime and
-      # comment lookups have always done so, and their recorded cassettes match
-      # on the method, so the choice stays explicit rather than size-driven.
+      # Fetch the objects of this type.
       #
-      # A block replaces the default construction, for the callers that need to
-      # weave extra context into each object (Services#downtimes resolving each
-      # downtime's service).
+      # Sent as a GET, unless the percent-encoded request line passes
+      # {MAX_QUERY_LENGTH} or +force_post+ is set, in which case it becomes a
+      # POST carrying {METHOD_OVERRIDE_HEADERS}.
+      #
+      # @example Restrict both the rows and the columns
+      #   collection.all(filter: 'user.__name=="admin"', attrs: %w[__name email])
+      #
+      # @param filter [String, nil] an Icinga filter; interpolate names through
+      #   {.escape}
+      # @param attrs [Array<String>, nil] attributes to return; omitting it
+      #   returns the whole object
+      # @param joins [Array<String>, nil] related objects to join in
+      # @param force_post [Boolean] post whatever the size. Downtime and comment
+      #   listings do, since that is the request shape their cassettes match on
+      # @yieldparam attrs [Hash] one object's raw attributes
+      # @yieldreturn [Object] what to build from them
+      # @return [Array<Resource>] instances of {#object_class}, or of whatever
+      #   the block returned
+      # @raise [Error] on any transport or HTTP failure
       def all(filter: nil, attrs: nil, joins: nil, force_post: false, &builder)
         params = build_params(filter, attrs, joins)
         builder ||= method(:build)
@@ -38,22 +67,37 @@ module Icinga2
         fetch(params, force_post: force_post).filter_map { |result| builder.call(result['attrs']) if result['attrs'] }
       end
 
+      # @!method where(filter: nil, attrs: nil, joins: nil, force_post: false, &builder)
+      #   Alias of {#all}, for call sites that read better as a query.
+      #   @return [Array<Resource>]
       alias where all
 
-      # Look an object up by its full Icinga name ("web01!ssh!mail").
-      # A filter matching nothing answers 404, which is an empty set here.
+      # Look an object up by its full Icinga name.
+      #
+      # @example
+      #   collection.find('web01!ssh!mail')
+      #
+      # @param name [String] the `__name`, e.g. "web01!ssh" for a service
+      # @return [Resource, nil] nil when nothing matches — Icinga2 answers 404
+      #   for an empty result set, which is not treated as a failure here
+      # @raise [Error] on any transport or HTTP failure other than that 404
       def find(name)
         all(filter: %(#{type.filter_variable}.__name=="#{escape(name)}")).first
       rescue Error::NotFound
         nil
       end
 
-      # Resolve a batch of names in a single request, in the order asked for.
-      # Names the server did not return are dropped rather than left as nil.
+      # Resolve a batch of names in a single request.
       #
       # Icinga2's `in` operator checks whether a value belongs to one of the
       # object's own arrays, so it cannot match a name against a list; a
       # disjunction is what resolves a batch in one round trip.
+      #
+      # @param names [Array<String>, String]
+      # @return [Array<Resource>] in the order asked for, with the names the
+      #   server did not return dropped rather than left as nil. Empty input
+      #   sends no request at all
+      # @raise [Error] on any transport or HTTP failure other than a 404
       def find_many(names)
         names = Array(names)
         return [] if names.empty?
@@ -72,12 +116,20 @@ module Icinga2
       # backslash closes the string early and yields a filter the server cannot
       # parse. Public because every caller that builds a filter by hand needs
       # it, not just this class.
+      #
+      # @example
+      #   %(host.name=="#{Icinga2::API::Objects.escape(name)}")
+      #
+      # @param value [#to_s]
+      # @return [String]
       def self.escape(value)
         value.to_s.gsub('\\', '\\\\\\\\').gsub('"', '\\"')
       end
 
       # The class objects of this type are built with: the dedicated one when
-      # the gem models it, GenericObject otherwise.
+      # the gem models it, {GenericObject} otherwise.
+      #
+      # @return [Class]
       def object_class
         @object_class ||=
           if API.const_defined?(type.name, false)

@@ -11,6 +11,10 @@ gemfiles/*.lock
 # Ignore test files
 /coverage
 
+# Ignore generated documentation
+/doc
+/.yardoc
+
 # Ignore dummy app files
 /spec/dummy/db/*.sqlite3
 /spec/dummy/db/*.sqlite3-journal

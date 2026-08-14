@@ -381,6 +381,12 @@ rescue Faraday exceptions directly. All of them inherit from
 | `Icinga2::API::Error::ServerError`     | server returned a `5xx`              |
 | `Icinga2::API::Error::Timeout`         | the request timed out                |
 | `Icinga2::API::Error::ConnectionFailed`| the connection could not be opened   |
+| `Icinga2::API::Error::UnknownType`     | the type is not in the catalog       |
+| `Icinga2::API::Error::UnknownRelation` | the field declares no reference      |
+
+The last two are raised **locally**, before anything is sent: they signal a
+mistake in the call, not a server failure. They are siblings, so rescuing one
+does not swallow the other.
 
 ```ruby
 begin

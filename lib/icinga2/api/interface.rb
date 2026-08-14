@@ -2,12 +2,25 @@
 
 module Icinga2
   module API
+    # Transport layer: owns the Faraday connection to an Icinga2 API and turns
+    # its answers into plain Ruby, its failures into this gem's own errors.
+    #
+    # Callers normally reach it through {Client#api} rather than building one.
+    #
+    # @example
+    #   api = Icinga2::API::Interface.new(
+    #     base_url: 'https://icinga.example.net:5665',
+    #     username: 'root', password: ENV.fetch('ICINGA_API_PASSWORD')
+    #   )
+    #   api.get('/objects/hosts', query: { attrs: %w[__name state] })
     class Interface
 
       # Maps Faraday transport errors to this gem's error hierarchy.
       # Order matters: most specific errors must come first (e.g.
       # Faraday::TimeoutError < Faraday::ServerError and
       # Faraday::ResourceNotFound < Faraday::ClientError).
+      #
+      # @return [Hash{Class => Class}]
       FARADAY_ERRORS = {
         Faraday::TimeoutError     => Error::Timeout,
         Faraday::ConnectionFailed => Error::ConnectionFailed,
@@ -16,10 +29,47 @@ module Icinga2
         Faraday::ServerError      => Error::ServerError
       }.freeze
 
+      # Every option {#initialize} accepts. Anything else is rejected rather
+      # than ignored, so a typo surfaces at build time instead of silently
+      # falling back to a default.
+      #
+      # @return [Array<Symbol>]
       KNOWN_OPTIONS = %i[base_url username password version ssl_options open_timeout timeout logging].freeze
 
-      attr_accessor :base_url, :username, :password, :version, :ssl_options, :open_timeout, :timeout, :logging
+      # @return [String] the API root, e.g. "https://icinga.example.net:5665"
+      attr_accessor :base_url
 
+      # @return [String] the API user
+      attr_accessor :username
+
+      # @return [String] the API user's password
+      attr_accessor :password
+
+      # @return [String] the API version segment, "v1" by default
+      attr_accessor :version
+
+      # @return [Hash] Faraday SSL options, e.g. `{ verify: false }`
+      attr_accessor :ssl_options
+
+      # @return [Integer, nil] seconds allowed to open the connection
+      attr_accessor :open_timeout
+
+      # @return [Integer, nil] seconds allowed for the whole request
+      attr_accessor :timeout
+
+      # @return [Hash] logging setup: `:enabled`, `:logger`, `:options`
+      attr_accessor :logging
+
+      # @param args [Hash] see {KNOWN_OPTIONS}
+      # @option args [String] :base_url required
+      # @option args [String] :username required
+      # @option args [String] :password required
+      # @option args [String] :version ("v1")
+      # @option args [Hash] :ssl_options ({})
+      # @option args [Integer, nil] :open_timeout (nil)
+      # @option args [Integer, nil] :timeout (30)
+      # @option args [Hash] :logging ({})
+      # @raise [ArgumentError] on an unknown option, or a missing required one
       def initialize(args = {})
         unknown = args.keys - KNOWN_OPTIONS
         raise ArgumentError, "unknown options: #{unknown.join(', ')}" unless unknown.empty?
@@ -34,18 +84,29 @@ module Icinga2
         @logging      = args.fetch(:logging, {})
       end
 
+      # @return [Logger, nil] the logger to hand to Faraday, if any
       def logger
         logging.fetch(:logger, nil)
       end
 
+      # @return [Hash] options passed to Faraday's logger middleware
       def logger_options
         logging.fetch(:options, {})
       end
 
+      # @return [Boolean] whether request logging is wired in at all
       def enable_logs
         logging.fetch(:enabled, false)
       end
 
+      # Send a GET and unwrap the Icinga2 envelope.
+      #
+      # @param path [String] path below the version segment, e.g. "/objects/hosts"
+      # @param query [Hash] query parameters; an Array value is serialised as a
+      #   repeated key (`attrs=a&attrs=b`), the only form Icinga2 honours
+      # @return [Array<Hash>] the `results` array, `[]` on an empty or
+      #   malformed body
+      # @raise [Error] on any transport or HTTP failure, never a Faraday error
       def get(path, query: {})
         # Prepare request options
         url = build_url(path, query)
@@ -54,6 +115,18 @@ module Icinga2
         with_error_handling { results(client.get(url)) }
       end
 
+      # Send a POST and unwrap the Icinga2 envelope.
+      #
+      # Also the way to issue a GET whose filter is too large for a query
+      # string: pass `headers: { 'X-HTTP-Method-Override' => 'GET' }`.
+      #
+      # @param path [String] path below the version segment
+      # @param query [Hash] query parameters
+      # @param params [Hash] request body, serialised as JSON
+      # @param headers [Hash] extra request headers
+      # @return [Array<Hash>] the `results` array, `[]` on an empty or
+      #   malformed body
+      # @raise [Error] on any transport or HTTP failure
       def post(path, query: {}, params: {}, headers: {})
         # Prepare request options
         url     = build_url(path, query)
@@ -64,6 +137,15 @@ module Icinga2
 
       # Subscribe to the Icinga2 event stream (/v1/events). Blocks, yielding each
       # newline-delimited JSON event as a Hash until the connection is closed.
+      #
+      # Uses a connection of its own, without the JSON response middleware and
+      # without a read timeout: the stream never completes on its own.
+      #
+      # @param path [String] usually "/events"
+      # @param params [Hash] request body: `:types`, `:queue`, optional `:filter`
+      # @yieldparam event [Hash] one decoded event
+      # @return [nil] only once the connection closes
+      # @raise [Error] on any transport or HTTP failure
       def stream(path, params: {}, &block)
         buffer = +''
 

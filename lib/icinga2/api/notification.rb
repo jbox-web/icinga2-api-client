@@ -20,10 +20,18 @@ module Icinga2
         navigate(:user_groups)
       end
 
+      # The period during which the rule notifies.
+      #
+      # @return [TimePeriod, nil]
+      # @raise [Error] on any transport or HTTP failure
       def time_period
         navigate(:period)
       end
 
+      # The command the rule fires.
+      #
+      # @return [GenericObject, nil]
+      # @raise [Error] on any transport or HTTP failure
       def notification_command
         navigate(:command)
       end
